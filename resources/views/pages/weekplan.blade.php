@@ -97,7 +97,7 @@
                                                 {{-- {{dd( $room->courses()->get() )}} --}}
                                                 @foreach ($room->courses()->get() as $course)
                                                 <option value="{{ $room->id . "-" . $course->id . "-" . $course->teacherId}}">
-                                                    {{ $course->name }}
+                                                    {{ $course->name ." - ". $course->teacherName }}
                                                 </option>
                                                 @endforeach
                                                 
