@@ -177,10 +177,10 @@ class MeetingController extends Controller
             if ( $userType == "student" ){
 
                 // Check meeting is running or not 
-                // $isRunning = Bigbluebutton::isMeetingRunning([
-                //     'meetingID' => $meeting_id,
-                // ]);
-                // if ( !$isRunning ) return "meeting is not running";
+                $isRunning = Bigbluebutton::isMeetingRunning([
+                    'meetingID' => $meeting_id,
+                ]);
+                if ( !$isRunning ) return "meeting is not running";
                 
 
                 return redirect()->to(
@@ -196,15 +196,15 @@ class MeetingController extends Controller
                 
                 $meeting_id = rand(10000000,999999999);
                 Meeting::create([
-                    // "ccs_id" =>  $ccs_id,
+                    "ccs_id" =>  $ccs_id,
                     "meeting_code" => $meeting_id,
-                    "record_code" => "123"
+                    
                 ]);
                 
                 return redirect()->to(
                     Bigbluebutton::start([
                         'meetingID' => $meeting_id,
-                        'callbackURL' => "https://webhook.site/625f4cf7-2e55-4803-98a3-e92f2d65c72b",
+                        // 'callbackURL' => "https://webhook.site/625f4cf7-2e55-4803-98a3-e92f2d65c72b",
                         'userName' => $user->fullName,
                         'moderatorPW' => 'moderatorpwd', //moderator password set here
                         'attendeePW' => 'attendeepwd',

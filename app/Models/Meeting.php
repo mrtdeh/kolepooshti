@@ -11,6 +11,6 @@ class Meeting extends Model
 
     protected $fillable = [
 
-        "meeting_code","record_code" ,"ccs_id"
+        "meeting_code" ,"ccs_id"
     ];
 }
