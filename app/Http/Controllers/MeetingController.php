@@ -164,13 +164,13 @@ class MeetingController extends Controller
                     array_push($target_schedules , $s);
                     
                     $ccs_id = $s->pivot->id;
-                    $meeting_id = Meeting::where("ccs_id","=",$ccs_id)
+                    $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     // ->orderBy('created_at', 'desc')
                     ->first();
                     // dd($ccs_id);
                     echo  $ccs_id;
                     echo "<br>";
-                    echo $meeting_id;
+                    echo $meeting->meeting_code;
                     echo "<br>";
 
                     
