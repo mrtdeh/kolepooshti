@@ -1,0 +1,338 @@
+/*================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 5.0
+	Author: PIXINVENT
+	Author URL: https://themeforest.net/user/pixinvent/portfolio
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+@font-face {
+    font-family: "IRANSansWeb";
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb.eot"); /* IE */
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb.eot?#iefix") format("embedded-opentype"), /* IE */
+    url("../../fonts/IRANSansWeb/IRANSansWeb.woff") format("woff"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb.woff2") format("woff2"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb.ttf") format("truetype"); /* Safari, Android, iOS */
+    font-weight: normal;
+}
+@font-face {
+    font-family: "IRANSansWeb_Bold";
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Bold.eot"); /* IE */
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Bold.eot?#iefix") format("embedded-opentype"), /* IE */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Bold.woff") format("woff"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Bold.woff2") format("woff2"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+    font-weight: bold;
+}
+@font-face {
+    font-family: "IRANSansWeb_Medium";
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Medium.eot"); /* IE */
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Medium.eot?#iefix") format("embedded-opentype"), /* IE */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Medium.woff") format("woff"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Medium.woff2") format("woff2"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Medium.ttf") format("truetype"); /* Safari, Android, iOS */
+    font-weight: normal;
+}
+@font-face {
+    font-family: "IRANSansWeb_Light";
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Light.eot"); /* IE */
+    src: url("../../fonts/IRANSansWeb/IRANSansWeb_Light.eot?#iefix") format("embedded-opentype"), /* IE */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Light.woff") format("woff"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Light.woff2") format("woff2"), /* Modern Browsers */
+    url("../../fonts/IRANSansWeb/IRANSansWeb_Light.ttf") format("truetype"); /* Safari, Android, iOS */
+    font-weight: lighter;
+}
+
+*{
+	font-family: IRANSansWeb;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: IRANSansWeb_Bold;
+}
+
+p,a {
+	font-family: IRANSansWeb;
+}
+
+input,button {
+	font-family: IRANSansWeb_Light;
+}
+.navbar .notification-badge {
+    font-family: IRANSansWeb_Light;
+}
+span.badge.new:after {
+    content: " جدید";
+}
+.content-wrapper-before {
+    background-image: url("../../images/bg/header-bg.svg"),linear-gradient(-45deg, #ffca28, #ff6f00) !important;
+}
+
+.brand-sidebar .logo-wrapper a.brand-logo img{
+    height: 25px;
+}
+
+.brand-sidebar .brand-logo {
+    padding: 12px 12px 12px 16px;
+}
+
+@media only screen and (max-width: 600px){
+    .sidenav-main .brand-sidebar .brand-logo {
+      padding: 10px;
+    }
+    .p-sm-0 {
+        padding: 0 !important;
+    }
+}
+
+.tabs .tab a {
+   color: #FFBE23;
+} 
+  
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #FF7201;
+}
+
+.tabs .indicator {
+    background-color: #FF7201;
+}
+
+.text-left {
+    text-align: right !important;
+}
+
+.text-orange {
+    color: #FFBE23;
+}
+  
+.fixed-button {
+    display: block;
+    text-align: center;
+}
+  
+.small {
+    font-size: 11px !important;
+}
+
+.medium {
+    font-size: 13px !important;
+}
+  
+.border-radius {
+    border-radius: 5px !important;
+}
+  
+.blur-none {
+    opacity: 1 !important;
+}
+  
+.float-none {
+    float: none;
+}
+  
+.m-0 {
+    margin: 0;
+}
+
+.text-dark {
+    color: #6B6F82;
+}
+
+[type=checkbox]:checked+span:not(.lever):before {
+    top: -4px;
+    left: 12px;
+    width: 12px;
+    height: 22px;
+    -webkit-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+    -webkit-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    transform-origin: 0% 100%;
+    border-top: 2px solid transparent;
+    border-left: 2px solid #ff4081;
+    border-bottom: 2px solid #ff4081;
+    border-right: 2px solid transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+[type=checkbox]+span:not(.lever):before, [type=checkbox]:not(.filled-in)+span:not(.lever):after {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    content: '';
+    -webkit-transition: .2s;
+    transition: .2s;
+    border: 2px solid #6B6F82;
+    border-radius: 1px;
+}
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.w-100 {
+    width: 100% !important;    
+}
+
+.w-50 {
+    width: 50% !important;    
+}
+
+.h-medium {
+    height: 300px !important;
+}
+
+.text-dark {
+    color: #6B6F82;
+}
+
+.navbar .header-search-wrapper-focus i {
+    color: #fd7e14 !important;
+}
+
+.border-dashed {
+    border: gray dashed 3px;
+}
+
+.border-padding {
+    padding: 20px !important;
+}
+
+.border-intro-padding {
+    padding: 40px !important;
+}
+  
+
+.modal-title {
+    padding: 15px;
+    font-size: 20px;
+    border-bottom: gray solid 1px;
+}
+
+.input-field .prefix.active {
+    color: #ff9800 !important;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #fd7e14;
+    box-shadow: 0 1px 0 0#fd7e14;
+}
+
+input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: #fd7e14;
+}
+
+#breadcrumbs-wrapper .breadcrumbs > li + li::before {
+    color: #ffffff;
+    content: "keyboard_arrow_left";
+}
+
+.border-intro-padding-class {
+    padding: 17% 5% !important;
+}
+
+.gary-text {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.collection .collection-item.avatar {
+    min-height: 55px;
+    padding-left: 70px;
+}
+
+.collection .collection-item {
+    padding: 8px 20px;
+}
+
+.height-20vh {
+    overflow: hidden;
+    max-height: 17.7vh !important;
+}
+
+
+.border-bottom-1-dark {
+    border-bottom: 1px solid #bebebe;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #fd7e14;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: rgb(110, 110, 110);
+}
+
+input:not([type]).validate + label, input[type=text]:not(.browser-default).validate + label, input[type=password]:not(.browser-default).validate + label, input[type=email]:not(.browser-default).validate + label, input[type=url]:not(.browser-default).validate + label, input[type=time]:not(.browser-default).validate + label, input[type=date]:not(.browser-default).validate + label, input[type=datetime]:not(.browser-default).validate + label, input[type=datetime-local]:not(.browser-default).validate + label, input[type=tel]:not(.browser-default).validate + label, input[type=number]:not(.browser-default).validate + label, input[type=search]:not(.browser-default).validate + label, textarea.materialize-textarea.validate + label {
+    width: 80%;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.select2 {
+    width: 84% !important;
+    float: right !important;
+}
+
+.tabs-vertical .tabs .tab a i {
+    top: 3px;
+}
+
+.tabs-vertical .tabs .tab a:hover {
+    color: #FF7A05 !important;
+}
+
+.tabs-vertical .tabs .tab a.active {
+    color: white !important;    
+    background-color: #FFC425 !important;
+}
+
+.tabs-vertical .tabs .tab a.active:hover {
+    color: white !important;
+}
+
+strong {
+    font-weight: 700 !important;
+}
+
+.border-top-1 {
+    border-top: 1px solid #000000 !important;
+}
+
+.gray {
+    background-color: rgba(0, 0, 0, 0.54) !important;
+}
+
+[type=checkbox]:checked + span:not(.lever):before {
+    border-left: 2px solid #FF7A05;
+    border-bottom: 2px solid #FF7A05;
+}
+
+.m-auto {
+    margin: auto !important;
+}

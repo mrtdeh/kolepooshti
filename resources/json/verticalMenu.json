@@ -1,0 +1,48 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "i18n": "Dashboard",
+      "class": "waves-effect waves-cyan",
+      "slug": "dashboard",
+      "icon": "fad fa-th"
+    },
+    {
+      "navheader": "مدرسه",
+      "icon": "more_horiz"
+    },
+    {
+      "url": "base",
+      "name": "Base",
+      "i18n": "Base",
+      "class": "waves-effect waves-cyan",
+      "slug": "base",
+      "icon": "fad fa-users-class"
+    },
+    {
+      "url": "weekplan",
+      "name": "WeekPlan",
+      "i18n": "WeekPlan",
+      "class": "waves-effect waves-cyan",
+      "slug": "weekplan",
+      "icon": "fad fa-calendar-alt"
+    },
+    {
+      "url": "conference",
+      "name": "Conference",
+      "i18n": "Conference",
+      "class": "waves-effect waves-cyan",
+      "slug": "conference",
+      "icon": "fad fa-graduation-cap"
+    },
+    {
+      "url": "extracurricular",
+      "name": "Extracurricular",
+      "i18n": "Extracurricular",
+      "class": "waves-effect waves-cyan",
+      "slug": "extracurricular",
+      "icon": "fad fa-books-medical"
+    }
+  ]
+}

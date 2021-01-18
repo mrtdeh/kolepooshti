@@ -1,0 +1,16 @@
+{
+  "listItems": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "pages",
+      "category": "Dashboard"
+    },
+    {
+      "url": "base",
+      "name": "Base",
+      "icon": "pages",
+      "category": "Base"
+    }
+  ]
+}

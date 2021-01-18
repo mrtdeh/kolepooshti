@@ -1,0 +1,23 @@
+/*----------------------------------------
+/*----------------------------------------
+    Login Page
+------------------------------------------*/
+
+.login-bg {
+  background-image: url(/images/login.jpg?0cce7588124eac123bb136b2cd6a7065);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#login-page .card-panel.border-radius-6.login-card {
+  margin-right: 0 !important;
+}
+
