@@ -165,24 +165,24 @@ class MeetingController extends Controller
                     
                     $ccs_id = $s->pivot->id;
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
-                    // ->orderBy('created_at', 'desc')
+                    ->orderBy('id', 'desc')
                     ->first();
                     // dd($ccs_id);
+                    $meeting_id = $meeting->meeting_code;
                     echo  $ccs_id;
                     echo "<br>";
-                    echo $meeting->meeting_code;
+                    // dd( $meeting);
                     echo "<br>";
-
-                    
+                    // dd();
                 }
             }
         }
 
         // Check user as Student or Teacher to join in room
-        // if (!empty($meeting_id)){
+        if (!empty($ccs_id)){
 
             if ( $userType == "student" ){
-
+// dd($meeting_id);
                 // Check meeting is running or not 
                 $isRunning = Bigbluebutton::isMeetingRunning([
                     'meetingID' => $meeting_id,
@@ -215,10 +215,11 @@ class MeetingController extends Controller
                         'userName' => $user->fullName,
                         'moderatorPW' => 'moderatorpwd', //moderator password set here
                         'attendeePW' => 'attendeepwd',
+                    
                     ])
                 );
             }
-        // }
+        }
 
 
 

@@ -16,11 +16,13 @@ use App\Http\Controllers\LanguageController;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+//  Auth::routes(['verify' => true]);
 
 Route::post('/meeting/check', 'MeetingController@check');
+Route::get('/', 'LoginController@login');
+
 // Page Route
-Route::middleware(["web"])->group(function(){
+Route::middleware(["web"])->prefix("panel")->group(function(){
 
 
     Route::get('/', 'PageController@showDashboard');
@@ -145,4 +147,4 @@ Route::get("/runsql",function(){
 
 });
 
-Auth::routes(['verify' => true]);
+

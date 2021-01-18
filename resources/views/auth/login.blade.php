@@ -72,11 +72,11 @@
             </div>
             <div class="row">
                 <div class="input-field col s6 m6 l6">
-                    <p class="margin medium-small"><a href="{{ route('register') }}">ورود به عنوان مهمان</a></p>
+                    <p class="margin medium-small"><a href="">ورود به عنوان مهمان</a></p>
                 </div>
                 <div class="input-field col s6 m6 l6">
                     <p class="margin right-align medium-small">
-                        <a href="{{ route('password.request') }}">فراموشی رمزعبور؟</a>
+                        <a href="">فراموشی رمزعبور؟</a>
                     </p>
                 </div>
             </div>
