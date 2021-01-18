@@ -13,4 +13,6 @@ class Meeting extends Model
 
         "meeting_code" ,"ccs_id"
     ];
+
+    public $timestamps = false;
 }
