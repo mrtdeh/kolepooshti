@@ -168,6 +168,11 @@ class MeetingController extends Controller
                     // ->orderBy('created_at', 'desc')
                     ->first();
                     // dd($ccs_id);
+                    echo  $ccs_id;
+                    echo "<br>";
+                    echo $meeting_id;
+                    echo "<br>";
+
                     
                 }
             }
