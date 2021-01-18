@@ -39,7 +39,7 @@ class CourseController extends Controller
         // $meeting_id = rand(1000000,9999999);
         $course->teachers()->sync([
 
-            $req->course_teacher => [ "class_id" => $req->cls_id ]
+            $req->course_teacher => [ "class_id" => $req->cls_id , "course_id" => $course->id]
             
         ]);
     
