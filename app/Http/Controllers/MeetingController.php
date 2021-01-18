@@ -171,7 +171,7 @@ class MeetingController extends Controller
                     $meeting_id = $meeting->meeting_code;
                     // echo  $ccs_id;
                     // echo "<br>";
-                    dd( $meeting);
+                    // dd( $meeting);
                     // echo "<br>";
                     // dd();
                 }
