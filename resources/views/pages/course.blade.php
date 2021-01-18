@@ -91,7 +91,7 @@
                         </div>
                         <div class="row">
                             <div class="col s12 m6 l6">
-                                <div class="input-field">
+                                {{-- <div class="input-field">
                                     <i class="fad fa-icons-alt prefix"></i>
                                     <select class="icons error validate" id="course_icon" name="course_icon" required>
                                         <option value="" disabled selected>انتخاب نماد درس</option>
@@ -130,10 +130,10 @@
                                         <option value="water" data-icon="{{ asset('images/icon/water.svg') }}" class="circle">آب</option>
                                         <option value="wave-sine" data-icon="{{ asset('images/icon/wave-sine.svg') }}" class="circle">نمودار</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col s12 m6 l6">
-                                <div class="input-field">
+                                {{-- <div class="input-field">
                                     <i class="fad fa-eye-dropper prefix"></i>
                                     <select class="icons error validate" id="course_color" name="course_color" required>
                                       <option value="" disabled selected>انتخاب رنگ</option>
@@ -148,10 +148,10 @@
                                       <option value="indiago" data-icon="{{ asset('images/colors/indiago.png') }}" class="circle">نیلی</option>
                                       <option value="yellow" data-icon="{{ asset('images/colors/yellow.png') }}" class="circle">زرد</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
-                        <div class="row mt-2">
+                        {{-- <div class="row mt-2">
                             <div class="file-field input-field">
                                 <div class="btn">
                                 <span>بارگذاری عکس</span>
@@ -160,7 +160,7 @@
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" placeholder="بنر درس"  required>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col s12 flexbox mt-5">
                                 <button type="submit" class="waves-effect waves-light btn green mr-3">ذخیره</button>

@@ -12,28 +12,28 @@ class CourseController extends Controller
     public function save(Request $req)
     {
        
-        $img = $req->validate([
-            'course_image' => 'required|image',
-        ]);
+        // $img = $req->validate([
+        //     'course_image' => 'required|image',
+        // ]);
 
-        $img = $img["course_image"];
-        $filename = "";
+        // $img = $img["course_image"];
+        // $filename = "";
 
-        if ($img !== null) {
+        // if ($img !== null) {
             
-            $filename  = "course_banner_" . time() . "." .$img->extension(); 
-            $img->move(public_path('uploads'), $filename);
+        //     $filename  = "course_banner_" . time() . "." .$img->extension(); 
+        //     $img->move(public_path('uploads'), $filename);
             // Storage::disk('upload')->put($img->tmp_name, $filename);
 
         
-        }
+        // }
         
         $course = Course::firstOrCreate(["name" => $req->course_name],[
 
-            "color" => $req->course_color,
-            "icon" => $req->course_icon,
-            "image" => $filename,
-            // "base_id" => $req->base_id
+            // "color" => $req->course_color,
+            // "icon" => $req->course_icon,
+            // "image" => $filename,
+        
         ]);
 
         // $meeting_id = rand(1000000,9999999);

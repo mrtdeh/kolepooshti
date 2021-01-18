@@ -18,27 +18,30 @@ use App\Http\Controllers\LanguageController;
  */
 
 
-// Page Route
-Route::get('/', 'PageController@showDashboard');
-Route::get('/base', 'PageController@showBase');
-Route::get('/base/class', 'PageController@showClass');
-Route::get('/base/class/courses', 'PageController@showCourses');
-
-Route::get('/base/class/course/chemistry', 'PageController@showChemistry');
-Route::get('/base/class/course/chemistry/class', 'PageController@showChemistryClass');
-Route::get('/page-blank', 'PageController@blankPage');
-Route::get('/page-collapse', 'PageController@collapsePage');
-Route::get('/weekplan', 'PageController@showWeekPlan');
-
 Route::post('/meeting/check', 'MeetingController@check');
+// Page Route
+Route::middleware(["web"])->group(function(){
 
 
-Route::post('/course/save', 'CourseController@save');
-Route::post('/weekplan/save', 'WeekPlanController@save');
-Route::post('/weekplan/time/add', 'WeekPlanController@addTime');
-// Route::post('/schedule/save', 'ScheduleController@save');
-Route::post('/user/save', 'UserController@save');
+    Route::get('/', 'PageController@showDashboard');
+    Route::get('/base', 'PageController@showBase');
+    Route::get('/base/class', 'PageController@showClass');
+    Route::get('/base/class/courses', 'PageController@showCourses');
 
+    Route::get('/base/class/course/chemistry', 'PageController@showChemistry');
+    Route::get('/base/class/course/chemistry/class', 'PageController@showChemistryClass');
+    Route::get('/page-blank', 'PageController@blankPage');
+    Route::get('/page-collapse', 'PageController@collapsePage');
+    Route::get('/weekplan', 'PageController@showWeekPlan');
+
+
+
+    Route::post('/course/save', 'CourseController@save');
+    Route::post('/weekplan/save', 'WeekPlanController@save');
+    Route::post('/weekplan/time/add', 'WeekPlanController@addTime');
+    // Route::post('/schedule/save', 'ScheduleController@save');
+    Route::post('/user/save', 'UserController@save');
+});
 
 
 // locale route
