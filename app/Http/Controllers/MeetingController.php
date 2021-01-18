@@ -168,11 +168,11 @@ class MeetingController extends Controller
                     ->orderBy('id', 'desc')
                     ->first();
                     // dd($ccs_id);
-                    $meeting_id = $meeting->meeting_code;
-                    echo  $ccs_id;
-                    echo "<br>";
-                    // dd( $meeting);
-                    echo "<br>";
+                    // $meeting_id = $meeting->meeting_code;
+                    // echo  $ccs_id;
+                    // echo "<br>";
+                    // // dd( $meeting);
+                    // echo "<br>";
                     // dd();
                 }
             }
