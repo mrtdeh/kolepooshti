@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
@@ -28,19 +29,13 @@ class CourseController extends Controller
         
         // }
         
-        $course = Course::firstOrCreate(["name" => $req->course_name],[
+        $course = Course::firstOrCreate(["name" => $req->course_name],[]);
 
-            // "color" => $req->course_color,
-            // "icon" => $req->course_icon,
-            // "image" => $filename,
-        
-        ]);
+        ClassRoom::addCourse([
 
-        // $meeting_id = rand(1000000,9999999);
-        $course->teachers()->sync([
-
-            $req->course_teacher => [ "class_id" => $req->cls_id , "course_id" => $course->id]
-            
+            "class_id" => $req->cls_id,
+            "course_id" => $course->id,
+            "teacher_id" => $req->course_teacher,
         ]);
     
         return redirect()->back();
