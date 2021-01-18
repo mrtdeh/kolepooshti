@@ -182,7 +182,7 @@ class MeetingController extends Controller
         if (!empty($ccs_id)){
 
             if ( $userType == "student" ){
-// dd($meeting_id);
+echo $meeting_id;
                 // Check meeting is running or not 
                 $isRunning = Bigbluebutton::isMeetingRunning([
                     'meetingID' => $meeting_id,
