@@ -154,7 +154,7 @@ class MeetingController extends Controller
 
                 // Check if today
                 $dayNumber = jdate('today')->toArray()["dayOfWeek"];
-                echo $dayNumber;
+                // echo $dayNumber;
                 $is_at_this_day = $dayNumber  == $s->day;
 
                 // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
@@ -177,10 +177,10 @@ class MeetingController extends Controller
             if ( $userType == "student" ){
 
                 // Check meeting is running or not 
-                $isRunning = Bigbluebutton::isMeetingRunning([
-                    'meetingID' => $meeting_id,
-                ]);
-                if ( !$isRunning ) return "meeting is not running";
+                // $isRunning = Bigbluebutton::isMeetingRunning([
+                //     'meetingID' => $meeting_id,
+                // ]);
+                // if ( !$isRunning ) return "meeting is not running";
                 
 
                 return redirect()->to(
