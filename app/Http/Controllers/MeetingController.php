@@ -163,7 +163,7 @@ echo "<br>time = " . ($is_at_this_time ? "1":"0");
                 // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
   
                 if ($is_at_this_day && $is_at_this_time){
-                dd("DDDDDDDDD");
+                // dd("DDDDDDDDD");
                     array_push($target_schedules , $s);
                     
                     if ($userType == "teacher"){
