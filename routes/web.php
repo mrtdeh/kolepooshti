@@ -21,6 +21,13 @@ use App\Http\Controllers\LanguageController;
 Route::post('/meeting/check', 'MeetingController@check');
 Route::get('/', 'LoginController@login');
 
+
+
+Route::post('/course/save', 'CourseController@save');
+Route::post('/weekplan/save', 'WeekPlanController@save');
+Route::post('/weekplan/time/add', 'WeekPlanController@addTime');
+// Route::post('/schedule/save', 'ScheduleController@save');
+Route::post('/user/save', 'UserController@save');
 // Page Route
 Route::middleware(["web"])->prefix("panel")->group(function(){
 
@@ -38,11 +45,6 @@ Route::middleware(["web"])->prefix("panel")->group(function(){
 
 
 
-    Route::post('/course/save', 'CourseController@save');
-    Route::post('/weekplan/save', 'WeekPlanController@save');
-    Route::post('/weekplan/time/add', 'WeekPlanController@addTime');
-    // Route::post('/schedule/save', 'ScheduleController@save');
-    Route::post('/user/save', 'UserController@save');
 });
 
 
