@@ -120,7 +120,7 @@ class MeetingController extends Controller
         $userType = $user->type;
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
-        dd($rooms->schedules);
+        dd($rooms);
       
         foreach ($rooms as $key => $room) {
 
