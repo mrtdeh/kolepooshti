@@ -211,6 +211,8 @@ echo $meeting_id;
             else {
                 
                 $meeting_id = rand(10000000,999999999);
+
+                dd();
                 Meeting::create([
                     "ccs_id" =>  $ccs_id,
                     "meeting_code" => $meeting_id,
