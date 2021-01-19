@@ -39,7 +39,7 @@
                 <div class="card gradient-shadow border-radius-3 border-padding">
                     <div class="card-content border-dashed center">
                         <a class="btn-floating btn-large waves-effect waves-light red" 
-                        href="{{ url('/base/class/course/chemistry?crs='.$course->id."&cls=".$room->id ) }}">
+                        href="{{ url('/panel/base/class/course/chemistry?crs='.$course->id."&cls=".$room->id ) }}">
                             <i class="fal fa-infinity"></i>
                         </a>
                         <p class="pt-10">{{ $course->name }}</p>

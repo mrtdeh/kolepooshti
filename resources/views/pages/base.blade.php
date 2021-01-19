@@ -32,7 +32,7 @@
                 <div class="card gradient-shadow border-radius-3 border-padding">
                     <div class="card-content border-dashed center border-intro-padding">
                         <a class="btn-floating btn-large waves-effect waves-light" 
-                        href="{{ url('/base/class?b='.$base->id) }}">
+                        href="{{ url('/panel/base/class?b='.$base->id) }}">
                             <i class="fas fa-users-class"></i>
                         </a>
                         <p class="pt-10">{{ $base->name }}</p>
