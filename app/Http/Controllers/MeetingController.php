@@ -167,8 +167,12 @@ class MeetingController extends Controller
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     ->orderBy('id', 'desc')
                     ->first();
+
+                    if(!empty($meeting)){
+                        $meeting_id = $meeting->meeting_code;
+
+                    }
                     // echo $ccs_id ;
-                    $meeting_id = $meeting->meeting_code;
                     // echo  $ccs_id;
                     // echo "<br>";
                     // dd( $meeting);
