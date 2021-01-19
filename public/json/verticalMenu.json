@@ -13,7 +13,7 @@
       "icon": "more_horiz"
     },
     {
-      "url": "base",
+      "url": "/panel/base",
       "name": "Base",
       "i18n": "Base",
       "class": "waves-effect waves-cyan",
@@ -21,7 +21,7 @@
       "icon": "fad fa-users-class"
     },
     {
-      "url": "weekplan",
+      "url": "/panel/weekplan",
       "name": "WeekPlan",
       "i18n": "WeekPlan",
       "class": "waves-effect waves-cyan",
@@ -29,7 +29,7 @@
       "icon": "fad fa-calendar-alt"
     },
     {
-      "url": "conference",
+      "url": "/panel/conference",
       "name": "Conference",
       "i18n": "Conference",
       "class": "waves-effect waves-cyan",
@@ -37,7 +37,7 @@
       "icon": "fad fa-graduation-cap"
     },
     {
-      "url": "extracurricular",
+      "url": "/panel/extracurricular",
       "name": "Extracurricular",
       "i18n": "Extracurricular",
       "class": "waves-effect waves-cyan",
