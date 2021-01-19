@@ -146,7 +146,8 @@ class MeetingController extends Controller
 
                 // Check if time is now
                 $is_at_this_time = $nowTime >= $a && $nowTime < $b;
-                dd(jdate($nowTime )->format("yy/mm/dd"));
+              print( "now = "  .jdate($nowTime )->format("y/m/d"));
+              echo "a = "  .jdate($a )->format("y/m/d");
 echo "<br>time = " . ($is_at_this_time ? "1":"0");
 
                 // $is_at_next_time = $nowTime < $a && $nowTime < $b;
