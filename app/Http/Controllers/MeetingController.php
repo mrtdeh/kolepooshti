@@ -146,7 +146,7 @@ class MeetingController extends Controller
 
                 // Check if time is now
                 $is_at_this_time = $nowTime >= $a && $nowTime < $b;
-echo "<br>time = " . $is_at_this_time ? "1":"0"."<br>";
+echo "<br>time = " . $is_at_this_time ? "1":"0";
 
                 // $is_at_next_time = $nowTime < $a && $nowTime < $b;
 
