@@ -124,7 +124,7 @@ class MeetingController extends Controller
       
         foreach ($rooms as $key => $room) {
 
-            dd($room->schedules);
+            // dd($room->schedules);
             // echo "room $key = " . $room->id. "<br>";
             $room = ClassRoom::with("schedules")->find($room->id);
            
