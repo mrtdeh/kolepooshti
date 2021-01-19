@@ -166,13 +166,19 @@ class MeetingController extends Controller
                 
                     array_push($target_schedules , $s);
                     
-                    $ccs_id = DB::table("class_course_schedule")
-                    ->where([
-                        ["class_id","=",$room->id],
-                        ["teacher_id","=",$user->id],
-                        ["schedule_id","=",$s->id]])->first();
+                    if ($userType == "teacher")
+                        $ccs_id = DB::table("class_course_schedule")
+                        ->where([
+                            ["class_id","=",$room->id],
+                            ["teacher_id","=",$user->id],
+                            ["schedule_id","=",$s->id]])->first()->id;
+                    else
+                        $ccs_id = DB::table("class_course_schedule")
+                        ->where([
+                            ["class_id","=",$room->id],
+                            ["schedule_id","=",$s->id]])->first()->id;   
 
-                        
+
                         echo "user id = " . $user->id;
                         dd($ccs_id);
 
