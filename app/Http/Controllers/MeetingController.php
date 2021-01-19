@@ -175,6 +175,8 @@ echo "<br>time = " . ($is_at_this_time ? "1":"0");
                             
                         if(!empty($ccs_id)){
                             $ccs_id = $ccs_id->id;
+
+                            dd($ccs_id);
                             break;
                         }
                     }
