@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Meeting;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
 class MeetingController extends Controller
@@ -164,7 +165,7 @@ class MeetingController extends Controller
                     array_push($target_schedules , $s);
                     
                     $ccs_id = DB::table("class_course_schedule")
-                    ->where(["class_id","=",$room->id],["schedule_id","=",$s->id])->first()->css_id;
+                    ->where([["class_id","=",$room->id],["schedule_id","=",$s->id]])->first()->id;
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     ->orderBy('id', 'desc')
                     ->first();
