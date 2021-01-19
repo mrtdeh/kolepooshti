@@ -179,6 +179,8 @@ echo "ccs id = " . $ccs_id."<br>";
                         $meeting_id = $meeting->meeting_code;
 
                     }
+
+                break;
                 }
             }
         }
