@@ -121,7 +121,7 @@ class MeetingController extends Controller
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
         
-        // dd($rooms);
+        dd($rooms);
         foreach ($rooms as $key => $room) {
 
             
@@ -179,16 +179,6 @@ class MeetingController extends Controller
                             ["class_id","=",$room->id],
                             ["schedule_id","=",$s->id]])->first()->id;   
                     }
-
-                    //     echo "user id = " . $user->id;
-                    //     // dd($ccs_id);
-
-                    // echo "class id = " . $room->id."<br>";
-                    // echo "schedule id = " . $s->id."<br>";
-                    // echo "ccs id = " . $ccs_id."<br>";
-
-                    
-
                 
                 }
             }
@@ -206,19 +196,12 @@ class MeetingController extends Controller
             $meeting_id = $meeting->meeting_code;
             // dd($meeting);
         }
-        echo "<br><br><br>";
-//    dd($ccs_id);
+
+
         // Check user as Student or Teacher to join in room
         if (!empty($ccs_id)){
 
-            // if (!empty($meeting_id)){
-                // dd("meeting_id = ".$meeting_id);
 
-                // $isRunning = Bigbluebutton::isMeetingRunning([
-                //     'meetingID' => $meeting_id,
-                // ]);
-                // if ( !$isRunning ) {
-                    
                     if (empty($meeting_id)){
 
                         $meeting_id = rand(10000000,999999999);
