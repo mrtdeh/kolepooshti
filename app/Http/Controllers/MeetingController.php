@@ -61,7 +61,7 @@ class MeetingController extends Controller
         $rooms = $user->rooms()->get();
         
         
-        // dd($room);
+        dd($rooms);
         foreach ($rooms as $key => $room) {
             
            
@@ -176,7 +176,7 @@ class MeetingController extends Controller
                             
                         if(!empty($ccs_id)){
                              $ccs_id = $ccs_id->id;
-                            // break;
+                            break;
                         }
                     }
                     else{
