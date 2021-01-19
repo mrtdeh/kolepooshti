@@ -172,6 +172,8 @@ class MeetingController extends Controller
                         ["teacher_id","=",$user->id],
                         ["schedule_id","=",$s->id]])->first();
 
+                        
+                        echo "user id = " . $user->id;
                         dd($ccs_id);
 
                     echo "class id = " . $room->id."<br>";
