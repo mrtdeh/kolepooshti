@@ -170,7 +170,9 @@ class MeetingController extends Controller
                     ->where([
                         ["class_id","=",$room->id],
                         ["teacher_id","=",$user->id],
-                        ["schedule_id","=",$s->id]])->first()->id;
+                        ["schedule_id","=",$s->id]])->first();
+
+                        dd($ccs_id);
 
                     echo "class id = " . $room->id."<br>";
                     echo "schedule id = " . $s->id."<br>";
