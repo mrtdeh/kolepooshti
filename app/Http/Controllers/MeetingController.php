@@ -166,6 +166,11 @@ class MeetingController extends Controller
                     
                     $ccs_id = DB::table("class_course_schedule")
                     ->where([["class_id","=",$room->id],["schedule_id","=",$s->id]])->first()->id;
+
+echo "class id = " . $room->id."<br>";
+echo "schedule id = " . $s->id."<br>";
+echo "ccs id = " . $ccs_id."<br>";
+
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     ->orderBy('id', 'desc')
                     ->first();
@@ -174,12 +179,6 @@ class MeetingController extends Controller
                         $meeting_id = $meeting->meeting_code;
 
                     }
-                    // echo $ccs_id ;
-                    // echo  $ccs_id;
-                    // echo "<br>";
-                    // dd( $meeting);
-                    // echo "<br>";
-                    // dd();
                 }
             }
         }
