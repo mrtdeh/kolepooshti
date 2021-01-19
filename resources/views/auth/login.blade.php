@@ -59,11 +59,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
+                {{-- <div class="input-field col s12">
                     <button type="submit"
                         class="btn waves-effect waves-light border-round gradient-45deg-amber-amber col s12">ورود به پنل کاربری
                     </button>
-                </div>
+                </div> --}}
                 <div class="input-field col s12">
                     <button type="submit"
                         class="btn waves-effect waves-light border-round gradient-45deg-indigo-purple col s12">ورود سریع به کلاس آنلاین
@@ -71,14 +71,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s6 m6 l6">
+                {{-- <div class="input-field col s6 m6 l6">
                     <p class="margin medium-small"><a href="">ورود به عنوان مهمان</a></p>
-                </div>
-                <div class="input-field col s6 m6 l6">
+                </div> --}}
+                {{-- <div class="input-field col s6 m6 l6">
                     <p class="margin right-align medium-small">
                         <a href="">فراموشی رمزعبور؟</a>
                     </p>
-                </div>
+                </div> --}}
             </div>
         </form>
     </div>
