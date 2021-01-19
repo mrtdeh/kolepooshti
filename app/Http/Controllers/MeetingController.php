@@ -166,18 +166,24 @@ class MeetingController extends Controller
                 
                     array_push($target_schedules , $s);
                     
-                    if ($userType == "teacher")
+                    if ($userType == "teacher"){
                         $ccs_id = DB::table("class_course_schedule")
                         ->where([
                             ["class_id","=",$room->id],
                             ["teacher_id","=",$user->id],
-                            ["schedule_id","=",$s->id]])->first()->id;
-                    else
+                            ["schedule_id","=",$s->id]])->first();
+                            
+                        if(!empty($ccs_id)){
+                             $ccs_id = $ccs_id->id;
+                            break;
+                        }
+                    }
+                    else{
                         $ccs_id = DB::table("class_course_schedule")
                         ->where([
                             ["class_id","=",$room->id],
                             ["schedule_id","=",$s->id]])->first()->id;   
-
+                        }
 
                         echo "user id = " . $user->id;
                         // dd($ccs_id);
@@ -195,7 +201,7 @@ class MeetingController extends Controller
 
                     }
 
-                break;
+                
                 }
             }
         }
