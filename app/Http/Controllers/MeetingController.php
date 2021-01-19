@@ -146,6 +146,7 @@ class MeetingController extends Controller
 
                 // Check if time is now
                 $is_at_this_time = $nowTime >= $a && $nowTime < $b;
+echo "<br>time = " . $is_at_this_time."<br>";
 
                 // $is_at_next_time = $nowTime < $a && $nowTime < $b;
 
@@ -155,7 +156,7 @@ class MeetingController extends Controller
                 $dayNumber = jdate('today')->toArray()["dayOfWeek"];
                 // echo $dayNumber;
                 $is_at_this_day = $dayNumber  == $s->day;
-
+                echo "<br>time = " . $is_at_this_day."<br>";
                 // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
   
                 if ($is_at_this_day && $is_at_this_time){
