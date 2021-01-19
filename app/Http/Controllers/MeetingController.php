@@ -180,7 +180,7 @@ class MeetingController extends Controller
 
 
                         echo "user id = " . $user->id;
-                        dd($ccs_id);
+                        // dd($ccs_id);
 
                     echo "class id = " . $room->id."<br>";
                     echo "schedule id = " . $s->id."<br>";
@@ -225,7 +225,7 @@ echo $meeting_id;
                 
                 $meeting_id = rand(10000000,999999999);
 
-                dd();
+                // dd();
                 Meeting::create([
                     "ccs_id" =>  $ccs_id,
                     "meeting_code" => $meeting_id,
