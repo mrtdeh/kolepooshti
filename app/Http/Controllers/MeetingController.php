@@ -167,7 +167,7 @@ class MeetingController extends Controller
                     array_push($target_schedules , $s);
                     
                     $ccs_id = DB::table("class_course_schedule")
-                    ->where([["class_id","=",$room->id],["schedule_id","=",$s->id]])->first()->id;
+                    ->where([["class_id","=",$room->id],["teacher_id","=",$user->id],["schedule_id","=",$s->id]])->first()->id;
 
                     echo "class id = " . $room->id."<br>";
                     echo "schedule id = " . $s->id."<br>";
