@@ -131,7 +131,7 @@ class MeetingController extends Controller
         // dd($rooms);
         foreach ($rooms as $key => $room) {
             
-           
+            echo "room $key = " . $room->id;
             $room = ClassRoom::with("schedules")->find($room->id);
             // if($room->id != 1)
             // dd($room );
@@ -141,6 +141,8 @@ class MeetingController extends Controller
             // Fetch Meeting Times in this Time
             foreach ($schedules as $i => $s) {
 
+                
+                echo "schedule $i = " . $s->id;
 
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
@@ -167,9 +169,9 @@ class MeetingController extends Controller
                     $ccs_id = DB::table("class_course_schedule")
                     ->where([["class_id","=",$room->id],["schedule_id","=",$s->id]])->first()->id;
 
-echo "class id = " . $room->id."<br>";
-echo "schedule id = " . $s->id."<br>";
-echo "ccs id = " . $ccs_id."<br>";
+                    echo "class id = " . $room->id."<br>";
+                    echo "schedule id = " . $s->id."<br>";
+                    echo "ccs id = " . $ccs_id."<br>";
 
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     ->orderBy('id', 'desc')
