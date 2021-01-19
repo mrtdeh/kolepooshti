@@ -25,9 +25,9 @@ class Schedule extends Model
         return explode("," , $days);
     }
 
-    public function courses()
+    public function course()
     {
-        return $this->belongsToMany( Course::class ,'class_course_schedule' ,"schedule_id" ); 
+        return $this->belongsToMany( Course::class ,'class_course_schedule' ,"schedule_id" )->first(); 
     }
 
     public static function addWeekTimes( $rows = [] , $clear = false )

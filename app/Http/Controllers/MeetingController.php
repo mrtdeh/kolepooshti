@@ -7,6 +7,7 @@ use App\Models\Meeting;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
 class MeetingController extends Controller
@@ -18,21 +19,11 @@ class MeetingController extends Controller
     {
 
 
-        //  return redirect()->to(
-        //             Bigbluebutton::join([
-        //                 'meetingID' => "sdfsdfsdfsdf",
-        //                 // 'callbackURL' => "https://webhook.site/625f4cf7-2e55-4803-98a3-e92f2d65c72b",
-        //                 'userName' => "123123",
-        //                 // 'moderatorPW' => 'moderatorpwd', //moderator password set here
-        //                 'password' => 'attendeepwd',
-        //             ])
-        //         );
+        $credentials = request()->only('username', 'password');
 
-        $user = User::where( "username" , request()->username )->first();
-        // dd($user);
-        if (!empty($user)){
-            
-            auth()->login($user);
+        if ( Auth::attempt($credentials)) {
+
+            $user = Auth::user();
 
     
             if ($user->type == "admin") return redirect("/panel");
@@ -42,7 +33,9 @@ class MeetingController extends Controller
             
         }else{
 
-            dd("username or pass is worng");
+            return back()->withErrors([
+                'username' => 'نام کاربری و گذرواژه اشتباه است',
+            ]);
         }
     }
 
@@ -120,6 +113,7 @@ class MeetingController extends Controller
         
         $target_schedules = [];
         $meeting_id = "";
+        $meetingName = "";
         $ccs_id = 0;
         $next_schedule = "";
         // $user = auth()->user();
@@ -131,7 +125,7 @@ class MeetingController extends Controller
         foreach ($rooms as $key => $room) {
 
             
-            echo "room $key = " . $room->id. "<br>";
+            // echo "room $key = " . $room->id. "<br>";
             $room = ClassRoom::with("schedules")->find($room->id);
             // if($room->id != 1)
             // dd($room );
@@ -162,7 +156,7 @@ class MeetingController extends Controller
                 $is_at_this_day = $dayNumber  == $s->day;
 
                 // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
-                // echo $is_at_this_day;
+  
                 if ($is_at_this_day && $is_at_this_time){
                 
                     array_push($target_schedules , $s);
@@ -175,7 +169,7 @@ class MeetingController extends Controller
                             ["schedule_id","=",$s->id]])->first();
                             
                         if(!empty($ccs_id)){
-                             $ccs_id = $ccs_id->id;
+                            $ccs_id = $ccs_id->id;
                             break;
                         }
                     }
@@ -184,69 +178,94 @@ class MeetingController extends Controller
                         ->where([
                             ["class_id","=",$room->id],
                             ["schedule_id","=",$s->id]])->first()->id;   
-                        }
-
-                        echo "user id = " . $user->id;
-                        // dd($ccs_id);
-
-                    echo "class id = " . $room->id."<br>";
-                    echo "schedule id = " . $s->id."<br>";
-                    echo "ccs id = " . $ccs_id."<br>";
-
-                    $meeting = Meeting::where("ccs_id","=",$ccs_id)
-                    ->orderBy('id', 'desc')
-                    ->first();
-
-                    if(!empty($meeting)){
-                        $meeting_id = $meeting->meeting_code;
-
                     }
+
+                    //     echo "user id = " . $user->id;
+                    //     // dd($ccs_id);
+
+                    // echo "class id = " . $room->id."<br>";
+                    // echo "schedule id = " . $s->id."<br>";
+                    // echo "ccs id = " . $ccs_id."<br>";
+
+                    
 
                 
                 }
             }
         }
 
+        $meetingName =  $room->name. ' - ' . $s->course()->name;
+        // dd($meetingName);
+        $meeting = Meeting::where("ccs_id","=",$ccs_id)
+        ->orderBy('id', 'desc')
+        ->first();
+        // dd($meeting);
+        
+
+        if(!empty($meeting)){
+            $meeting_id = $meeting->meeting_code;
+            // dd($meeting);
+        }
+        echo "<br><br><br>";
+//    dd($ccs_id);
         // Check user as Student or Teacher to join in room
         if (!empty($ccs_id)){
 
-            if ( $userType == "student" ){
-echo $meeting_id;
-                // Check meeting is running or not 
-                $isRunning = Bigbluebutton::isMeetingRunning([
-                    'meetingID' => $meeting_id,
-                ]);
-                if ( !$isRunning ) return "meeting is not running";
-                
+            // if (!empty($meeting_id)){
+                // dd("meeting_id = ".$meeting_id);
 
+                // $isRunning = Bigbluebutton::isMeetingRunning([
+                //     'meetingID' => $meeting_id,
+                // ]);
+                // if ( !$isRunning ) {
+                    
+                    if (empty($meeting_id)){
+
+                        $meeting_id = rand(10000000,999999999);
+                        Meeting::create([
+                            "ccs_id" =>  $ccs_id,
+                            "meeting_code" => $meeting_id,
+                            
+                        ]);
+                    }
+
+                    $password = $userType == "student" ? "attendeepw" : "moderatorpw";
+
+                    // return redirect()->to(
+                    Bigbluebutton::create([
+                    
+                        'meetingID' => $meeting_id,
+                        'meetingName' =>  $meetingName,
+                        'attendeePW' => 'attendeepw',
+                        'moderatorPW' => 'moderatorpw',
+                        'userName' => $user->fullName
+                    ]);
+                    // );
+                // }
+            // }
+
+           
+
+            if ( $userType == "student" ){
+
+                // dd($meeting_id);
                 return redirect()->to(
                     Bigbluebutton::join([
                         'meetingID' => $meeting_id,
                         'userName' => $user->fullName,
-                        'password' => 'attendeepwd' 
+                        'password' => 'attendeepw' 
                     ])
                 );
 
             }
             else {
                 
-                $meeting_id = rand(10000000,999999999);
-
-                // dd();
-                Meeting::create([
-                    "ccs_id" =>  $ccs_id,
-                    "meeting_code" => $meeting_id,
-                    
-                ]);
                 
                 return redirect()->to(
-                    Bigbluebutton::start([
+                    Bigbluebutton::join([
                         'meetingID' => $meeting_id,
-                        // 'callbackURL' => "https://webhook.site/625f4cf7-2e55-4803-98a3-e92f2d65c72b",
                         'userName' => $user->fullName,
-                        'moderatorPW' => 'moderatorpwd', //moderator password set here
-                        'attendeePW' => 'attendeepwd',
-                    
+                        'password' => 'moderatorpw' 
                     ])
                 );
             }
