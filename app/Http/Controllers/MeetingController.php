@@ -163,7 +163,8 @@ class MeetingController extends Controller
                 
                     array_push($target_schedules , $s);
                     
-                    $ccs_id = $s->pivot->id;
+                    $ccs_id = DB::table("class_course_schedule")
+                    ->where(["class_id","=",$room->id],["schedule_id","=",$s->id])->first()->css_id;
                     $meeting = Meeting::where("ccs_id","=",$ccs_id)
                     ->orderBy('id', 'desc')
                     ->first();
