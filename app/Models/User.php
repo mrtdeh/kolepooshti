@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,8 +42,11 @@ class User extends Authenticatable
       
     public function rooms()
     {
+        $id = $this->attributes["id"];
         if ($this->attributes["type"] == "teacher")
+
             return $this->belongsToMany( ClassRoom::class , "class_course_schedule" , "teacher_id", "class_id");
+            // return DB::table("class_course_schedule")->where("teacher_id","=",$id);
 
         return $this->belongsToMany( ClassRoom::class , "class_user" , "user_id" ,"class_id");
     }

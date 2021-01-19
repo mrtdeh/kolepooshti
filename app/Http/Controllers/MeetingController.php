@@ -127,22 +127,23 @@ class MeetingController extends Controller
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
         
-        
         // dd($rooms);
         foreach ($rooms as $key => $room) {
+
             
-            echo "room $key = " . $room->id;
+            echo "room $key = " . $room->id. "<br>";
             $room = ClassRoom::with("schedules")->find($room->id);
             // if($room->id != 1)
             // dd($room );
-
+            
             $schedules = $room->schedules;
-             
+            
+            
             // Fetch Meeting Times in this Time
             foreach ($schedules as $i => $s) {
 
                 
-                echo "schedule $i = " . $s->id;
+                echo "schedule $i = " . $s->id . "<br>";
 
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
@@ -175,7 +176,7 @@ class MeetingController extends Controller
                             
                         if(!empty($ccs_id)){
                              $ccs_id = $ccs_id->id;
-                            break;
+                            // break;
                         }
                     }
                     else{
