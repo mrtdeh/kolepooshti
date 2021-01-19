@@ -50,65 +50,65 @@ class MeetingController extends Controller
 //=========================================================================================
 
     
-    public function nextMeetingInfo()
-    {
+    // public function nextMeetingInfo()
+    // {
         
-        $target_schedules = [];
-        $next_schedule = "";
-        $user = auth()->user();
-        $userType = $user->type;
-        // Fetch All course Times for this User
-        $rooms = $user->rooms()->get();
+    //     $target_schedules = [];
+    //     $next_schedule = "";
+    //     $user = auth()->user();
+    //     $userType = $user->type;
+    //     // Fetch All course Times for this User
+    //     $rooms = $user->rooms()->get();
         
         
-        dd($rooms);
-        foreach ($rooms as $key => $room) {
+    //     // dd($rooms);
+    //     foreach ($rooms as $key => $room) {
             
            
-            $room = ClassRoom::with("schedules")->find($room->id);
+    //         $room = ClassRoom::with("schedules")->find($room->id);
             
 
-            $schedules = $room->schedules;
+    //         $schedules = $room->schedules;
              
-            // Fetch Meeting Times in this Time
-            foreach ($schedules as $i => $s) {
+    //         // Fetch Meeting Times in this Time
+    //         foreach ($schedules as $i => $s) {
 
 
-                $a = strtotime($s->start);
-                $b = strtotime($s->end);
-                $nowTime  = time();
+    //             $a = strtotime($s->start);
+    //             $b = strtotime($s->end);
+    //             $nowTime  = time();
 
-                // Check if time is now
-                $is_at_this_time = $nowTime >= $a && $nowTime < $b;
+    //             // Check if time is now
+    //             $is_at_this_time = $nowTime >= $a && $nowTime < $b;
 
-                $is_at_next_time = $nowTime < $a && $nowTime < $b;
+    //             $is_at_next_time = $nowTime < $a && $nowTime < $b;
 
                 
 
-                // Check if today
-                $dayNumber = jdate('today')->toArray()["dayOfWeek"];
-                // echo $dayNumber;
-                $is_at_this_day = $dayNumber  == $s->day;
+    //             // Check if today
+    //             $dayNumber = jdate('today')->toArray()["dayOfWeek"];
+    //             // echo $dayNumber;
+    //             $is_at_this_day = $dayNumber  == $s->day;
 
-                // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
-                // echo $is_at_this_day;
-                if ($is_at_this_day && $is_at_this_time){
+    //             // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
+    //             // echo $is_at_this_day;
+    //             if ($is_at_this_day && $is_at_this_time){
                 
-                    array_push($target_schedules , $s);
+    //                 array_push($target_schedules , $s);
 
                     
-                }
+    //             }
 
-                if ($is_at_next_time){
-                    // if( $next_schedule )
-                    $next_schedule = $s;
-                }
-            }
-        }
+    //             if ($is_at_next_time){
+    //                 // if( $next_schedule )
+    //                 $next_schedule = $s;
+    //             }
+    //         }
+    //     }
         
-        return count($target_schedules) ? $target_schedules : $next_schedule;
+    //     return count($target_schedules) ? $target_schedules : $next_schedule;
 
-    }
+    // }
 
 
 
@@ -127,7 +127,7 @@ class MeetingController extends Controller
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
         
-        // dd($rooms);
+        dd($rooms);
         foreach ($rooms as $key => $room) {
 
             
