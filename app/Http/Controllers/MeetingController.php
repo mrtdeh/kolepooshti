@@ -213,7 +213,7 @@ class MeetingController extends Controller
 
 
 
-dd($target_schedules);
+
 
         if (!empty($target_schedules)){
 
@@ -234,6 +234,8 @@ dd($target_schedules);
                 $meeting_id = $meeting->meeting_code;
                 // dd($meeting);
             }
+
+            dd($meeting_id);
 
             if (empty($meeting_id)){
 
