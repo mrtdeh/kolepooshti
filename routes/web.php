@@ -24,9 +24,9 @@ Route::get('/meeting/select', 'MeetingController@select');
 Route::get('/', 'LoginController@login');
 
 Route::get('/test',function(){
-    return redirect()->to((Bigbluebutton::hooksCreate([
+    return redirect()->to(Bigbluebutton::hooksCreate([
         'callbackURL' => 'https://shahedrz.kolepooshti.ir/hook', //required
-  ])));
+  ]));
 });
 
 Route::post('/course/save', 'CourseController@save');
