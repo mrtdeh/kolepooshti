@@ -96,7 +96,7 @@ class MeetingController extends Controller
             ]);
     
 
-            if ( $userType == "student" ){
+            if ( $user->type == "student" ){
 
                 // dd($meeting_id);
                 return redirect()->to(
