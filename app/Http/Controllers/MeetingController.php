@@ -54,6 +54,25 @@ class MeetingController extends Controller
 
         $ccs_id = $req->ccs;
 
+        
+
+        $meeting_name =  $req->mn;
+
+        $user = User::find($req->uid);
+
+        return $this->enter( $user  , $ccs_id, $meeting_name);
+        
+
+        return "Selcted meeting not found";
+    }
+
+
+//=========================================================================================
+
+
+    private function enter( $user , $ccs_id , $meeting_name )
+    {
+
         $meeting = Meeting::where("ccs_id","=",$ccs_id)
         ->orderBy('id', 'desc')
         ->first();
@@ -64,62 +83,53 @@ class MeetingController extends Controller
             $meeting_id = $meeting->meeting_code;
             // dd($meeting);
         }
-
-        $meeting_name =  $req->mn;
-
-        $user = User::find($req->uid);
-
-        return $this->enter( $user  , $meeting_id, $meeting_name);
         
+        if (empty($meeting_id)){
 
-        return "Selcted meeting not found";
-    }
-
-
-//=========================================================================================
-
-
-    private function enter( $user , $meeting_id , $meeting_name )
-    {
-        
-        if(!empty($meeting_id)){
-
-
-
-            Bigbluebutton::create([
-            
-                'meetingID' => $meeting_id,
-                'meetingName' =>  $meeting_name,
-                'attendeePW' => 'attendeepw',
-                'moderatorPW' => 'moderatorpw',
-                'userName' => $user->fullName
+            $meeting_id = rand(10000000,999999999);
+            Meeting::create([
+                "ccs_id" =>  $ccs_id,
+                "meeting_code" => $meeting_id,
+                
             ]);
-    
-
-            if ( $user->type == "student" ){
-
-                // dd($meeting_id);
-                return redirect()->to(
-                    Bigbluebutton::join([
-                        'meetingID' => $meeting_id,
-                        'userName' => $user->fullName,
-                        'password' => 'attendeepw' 
-                    ])
-                );
-
-            }
-            else {
-                
-                
-                return redirect()->to(
-                    Bigbluebutton::join([
-                        'meetingID' => $meeting_id,
-                        'userName' => $user->fullName,
-                        'password' => 'moderatorpw' 
-                    ])
-                );
-            }
         }
+
+
+
+        Bigbluebutton::create([
+        
+            'meetingID' => $meeting_id,
+            'meetingName' =>  $meeting_name,
+            'attendeePW' => 'attendeepw',
+            'moderatorPW' => 'moderatorpw',
+            'userName' => $user->fullName
+        ]);
+
+
+        if ( $user->type == "student" ){
+
+            // dd($meeting_id);
+            return redirect()->to(
+                Bigbluebutton::join([
+                    'meetingID' => $meeting_id,
+                    'userName' => $user->fullName,
+                    'password' => 'attendeepw' 
+                ])
+            );
+
+        }
+        else {
+            
+            
+            return redirect()->to(
+                Bigbluebutton::join([
+                    'meetingID' => $meeting_id,
+                    'userName' => $user->fullName,
+                    'password' => 'moderatorpw' 
+                ])
+            );
+        }
+        
 
         return "Selected meeting id not valid";
         
@@ -247,18 +257,18 @@ class MeetingController extends Controller
 
             // dd($meeting_id);
 
-            if (empty($meeting_id)){
+            // if (empty($meeting_id)){
 
-                $meeting_id = rand(10000000,999999999);
-                Meeting::create([
-                    "ccs_id" =>  $ccs_id,
-                    "meeting_code" => $meeting_id,
+            //     $meeting_id = rand(10000000,999999999);
+            //     Meeting::create([
+            //         "ccs_id" =>  $ccs_id,
+            //         "meeting_code" => $meeting_id,
                     
-                ]);
-            }
+            //     ]);
+            // }
 
 
-            return $this->enter( $user , $meeting_id, $meetingName);
+            return $this->enter( $user , $ccs_id, $meetingName);
         
 
         }
