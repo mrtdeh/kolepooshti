@@ -47,7 +47,7 @@ class User extends Authenticatable
 
             return $this->belongsToMany( ClassRoom::class , "class_course_schedule" , "teacher_id", "class_id")
             ->withPivot("schedule_id")
-            ->where("schedule_id","!=","");
+            ->where("schedule_id","!=","")->distinct();
             // return DB::table("class_course_schedule")->where("teacher_id","=",$id);
 
         return $this->belongsToMany( ClassRoom::class , "class_user" , "user_id" ,"class_id");
