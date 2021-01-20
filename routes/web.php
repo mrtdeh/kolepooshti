@@ -58,8 +58,6 @@ Route::middleware(["web"])->prefix("panel")->group(function(){
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 
-// Route::get('/login', 'LoginController@login');
-
 
 Route::get("/runsql",function(){
 
