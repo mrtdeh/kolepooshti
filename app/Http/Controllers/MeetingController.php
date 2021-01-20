@@ -221,7 +221,7 @@ class MeetingController extends Controller
                             ["schedule_id","=",$s->id]])->first();
                             
                         if(!empty($ccs)){
-                            $ccs_id = $ccs_id->id;
+                            $ccs_id = $ccs->id;
                             
                         }
                         // if(empty($ccs_id)) dd([
