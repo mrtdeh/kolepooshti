@@ -231,7 +231,7 @@ class MeetingController extends Controller
                             ["schedule_id","=",$s->id]])->first()->id;   
                     }
 
-                    dd($ccs_id);
+                    echo "ccs = " . $ccs_id;
 
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
 
@@ -246,12 +246,9 @@ class MeetingController extends Controller
               
             }
 
-            // $ccs_id = null;
-
-            // if(!empty($ccs_id))break;
             
         }
-
+dd();
 
 
 
