@@ -222,8 +222,8 @@ class MeetingController extends Controller
                             
                         if(!empty($ccs_id)){
                             $ccs_id = $ccs_id->id;
-                            echo "ccs = " . $ccs_id;
-                            if(empty($ccs_id)) dd($ccs_id);
+                            
+                            if(empty($ccs_id)) dd("end ccs = ".$ccs_id);
                         }
                     }
                     else{
@@ -234,7 +234,7 @@ class MeetingController extends Controller
                     }
 
                    
-
+                    echo "ccs = " . $ccs_id;
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
 
                     if(!empty($ccs_id))
