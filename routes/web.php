@@ -19,9 +19,15 @@ use App\Http\Controllers\LanguageController;
 //  Auth::routes(['verify' => true]);
 
 Route::post('/meeting/check', 'MeetingController@check');
+Route::get('/meetig/list', 'MeetingController@list');
+Route::get('/meeting/select', 'MeetingController@select');
 Route::get('/', 'LoginController@login');
 
-
+Route::get('/test',function(){
+    return redirect()->to((Bigbluebutton::hooksCreate([
+        'callbackURL' => 'https://shahedrz.kolepooshti.ir/hook', //required
+  ])));
+});
 
 Route::post('/course/save', 'CourseController@save');
 Route::post('/weekplan/save', 'WeekPlanController@save');

@@ -18,6 +18,8 @@ class MeetingController extends Controller
     public function check()
     {
 
+     
+
 
         $credentials = request()->only('username', 'password');
 
@@ -37,6 +39,43 @@ class MeetingController extends Controller
                 'username' => 'نام کاربری و گذرواژه اشتباه است',
             ]);
         }
+    }
+
+
+    public function list()
+    {
+        return view("pages.loginMeetingList",request()->all());
+    }
+
+
+
+    public function select(Request $req)
+    {
+
+        $ccs_id = $req->ccs;
+
+        $meeting = Meeting::where("ccs_id","=",$ccs_id)
+        ->orderBy('id', 'desc')
+        ->first();
+
+        $user = User::find($req->uid);
+// dd($meeting);
+
+        if (!empty($meeting)){
+        
+            return redirect()->to(
+                Bigbluebutton::start([
+                        
+                    'meetingID' => $meeting->meeting_code,
+                    'meetingName' =>  $req->mn,
+                    'attendeePW' => 'attendeepw',
+                    'moderatorPW' => 'moderatorpw',
+                    'userName' => $user->fullName
+                ])
+            );
+        }
+
+        return "sdf";
     }
 
 
@@ -120,7 +159,7 @@ class MeetingController extends Controller
         $userType = $user->type;
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
-       
+        // dd(  $user->id);
       
         foreach ($rooms as $key => $room) {
 
@@ -138,7 +177,7 @@ class MeetingController extends Controller
             foreach ($schedules as $i => $s) {
 
                 
-                echo "schedule $i = " . $s->id . "<br>";
+                // echo "schedule $i = " . $s->id . "<br>";
 
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
@@ -146,10 +185,10 @@ class MeetingController extends Controller
 
                 // Check if time is now
                 $is_at_this_time = $nowTime >= $a && $nowTime < $b;
-              print( $s->start);
-              print( $s->end);
-              echo "a = "  .jdate($a )->format("h:M");
-echo "<br>time = " . ($is_at_this_time ? "1":"0");
+            //   print( $s->start);
+            //   print( $s->end);
+            //   echo "a = "  .jdate($a )->format("h:M");
+            //     echo "<br>time = " . ($is_at_this_time ? "1":"0");
 
                 // $is_at_next_time = $nowTime < $a && $nowTime < $b;
 
@@ -164,7 +203,7 @@ echo "<br>time = " . ($is_at_this_time ? "1":"0");
   
                 if ($is_at_this_day && $is_at_this_time){
                 // dd("DDDDDDDDD");
-                    array_push($target_schedules , $s);
+                    
                     
                     if ($userType == "teacher"){
                         $ccs_id = DB::table("class_course_schedule")
@@ -175,7 +214,6 @@ echo "<br>time = " . ($is_at_this_time ? "1":"0");
                             
                         if(!empty($ccs_id)){
                             $ccs_id = $ccs_id->id;
-                            break;
                         }
                     }
                     else{
@@ -184,56 +222,73 @@ echo "<br>time = " . ($is_at_this_time ? "1":"0");
                             ["class_id","=",$room->id],
                             ["schedule_id","=",$s->id]])->first()->id;   
                     }
+
+                    $meetingName =  $room->name. ' - ' . $s->course()->name;
+
+                    array_push($target_schedules , [
+                        "ccs_id" => $ccs_id,
+                        "meetingName" => $meetingName,
+                    ]);
                 
                 }
 
               
             }
 
-            if(!empty($ccs_id))break;
+            // if(!empty($ccs_id))break;
+            
+        }
+
+
+
+
+
+
+        if (!empty($ccs_id)){
+
+            if(count($target_schedules) > 1){
+
+                return view("pages.loginMeetingList",compact("target_schedules","user"));
+            }
             
 
-        }
-
-        $meetingName =  $room->name. ' - ' . $s->course()->name;
-        // dd($meetingName);
-        $meeting = Meeting::where("ccs_id","=",$ccs_id)
-        ->orderBy('id', 'desc')
-        ->first();
-        // dd($meeting);
-        
-
-        if(!empty($meeting)){
-            $meeting_id = $meeting->meeting_code;
+            // dd($meetingName);
+            $meeting = Meeting::where("ccs_id","=",$ccs_id)
+            ->orderBy('id', 'desc')
+            ->first();
             // dd($meeting);
-        }
+            
+
+            if(!empty($meeting)){
+                $meeting_id = $meeting->meeting_code;
+                // dd($meeting);
+            }
 
 
         // Check user as Student or Teacher to join in room
-        if (!empty($ccs_id)){
 
 
-                    if (empty($meeting_id)){
+            if (empty($meeting_id)){
 
-                        $meeting_id = rand(10000000,999999999);
-                        Meeting::create([
-                            "ccs_id" =>  $ccs_id,
-                            "meeting_code" => $meeting_id,
-                            
-                        ]);
-                    }
-
-                    $password = $userType == "student" ? "attendeepw" : "moderatorpw";
-
-                    // return redirect()->to(
-                    Bigbluebutton::create([
+                $meeting_id = rand(10000000,999999999);
+                Meeting::create([
+                    "ccs_id" =>  $ccs_id,
+                    "meeting_code" => $meeting_id,
                     
-                        'meetingID' => $meeting_id,
-                        'meetingName' =>  $meetingName,
-                        'attendeePW' => 'attendeepw',
-                        'moderatorPW' => 'moderatorpw',
-                        'userName' => $user->fullName
-                    ]);
+                ]);
+            }
+
+            $password = $userType == "student" ? "attendeepw" : "moderatorpw";
+
+            // return redirect()->to(
+            Bigbluebutton::create([
+            
+                'meetingID' => $meeting_id,
+                'meetingName' =>  $meetingName,
+                'attendeePW' => 'attendeepw',
+                'moderatorPW' => 'moderatorpw',
+                'userName' => $user->fullName
+            ]);
                     // );
                 // }
             // }
