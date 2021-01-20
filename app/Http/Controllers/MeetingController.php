@@ -140,10 +140,15 @@ class MeetingController extends Controller
         $userType = $user->type;
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
+
+        $room_checkout = [];
         // dd(  $user->id);
-      dd($user->rooms()->distinct()->get());
+    //   dd($user->rooms()->distinct()->get());
         foreach ($rooms as $key => $room) {
 
+            if (in_array($room->id ,   $room_checkout)) continue;
+
+            array_push( $room_checkout , $room->id );
             // dd($room->schedules);
             // echo "room $key = " . $room->id. "<br>";
             $room = ClassRoom::with("schedules")->find($room->id);
