@@ -185,7 +185,7 @@ class MeetingController extends Controller
             foreach ($schedules as $i => $s) {
 
                 
-                // echo "schedule $i = " . $s->id . "<br>";
+                echo "schedule $i = " . $s->id . "<br>";
 
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
@@ -244,6 +244,8 @@ class MeetingController extends Controller
               
             }
 
+            $ccs_id = null;
+
             // if(!empty($ccs_id))break;
             
         }
@@ -253,7 +255,7 @@ class MeetingController extends Controller
 
 
 
-        if (!empty($ccs_id)){
+        if (!empty($target_schedules)){
 
             if(count($target_schedules) > 1){
 
