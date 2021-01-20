@@ -214,20 +214,20 @@ class MeetingController extends Controller
                     
                     
                     if ($userType == "teacher"){
-                        $ccs_id = DB::table("class_course_schedule")
+                        $ccs = DB::table("class_course_schedule")
                         ->where([
                             ["class_id","=",$room->id],
                             ["teacher_id","=",$user->id],
                             ["schedule_id","=",$s->id]])->first();
                             
-                        if(!empty($ccs_id)){
+                        if(!empty($ccs)){
                             $ccs_id = $ccs_id->id;
                             
                         }
-                        if(empty($ccs_id)) dd([
-                            ["class_id","=",$room->id],
-                            ["teacher_id","=",$user->id],
-                            ["schedule_id","=",$s->id]]);
+                        // if(empty($ccs_id)) dd([
+                        //     ["class_id","=",$room->id],
+                        //     ["teacher_id","=",$user->id],
+                        //     ["schedule_id","=",$s->id]]);
                     }
                     else{
                         $ccs_id = DB::table("class_course_schedule")
@@ -237,7 +237,7 @@ class MeetingController extends Controller
                     }
 
                    
-                    echo "ccs = " . $ccs_id;
+                    // echo "ccs = " . $ccs_id;
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
 
                     if(!empty($ccs_id))
@@ -253,7 +253,7 @@ class MeetingController extends Controller
 
             
         }
-dd();
+// dd();
 
 
 
