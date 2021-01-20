@@ -235,7 +235,7 @@ class MeetingController extends Controller
                 // dd($meeting);
             }
 
-            dd($meeting_id);
+            // dd($meeting_id);
 
             if (empty($meeting_id)){
 
