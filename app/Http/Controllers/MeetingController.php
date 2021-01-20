@@ -244,7 +244,7 @@ class MeetingController extends Controller
               
             }
 
-            $ccs_id = null;
+            // $ccs_id = null;
 
             // if(!empty($ccs_id))break;
             
