@@ -53,7 +53,7 @@ Route::middleware(["web"])->prefix("panel")->group(function(){
 
 });
 
-
+//sdfsdf
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
