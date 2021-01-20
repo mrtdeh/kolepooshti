@@ -223,8 +223,11 @@ class MeetingController extends Controller
                         if(!empty($ccs_id)){
                             $ccs_id = $ccs_id->id;
                             
-                            if(empty($ccs_id)) dd("end ccs = ".$ccs_id);
                         }
+                        if(empty($ccs_id)) dd([
+                            ["class_id","=",$room->id],
+                            ["teacher_id","=",$user->id],
+                            ["schedule_id","=",$s->id]]);
                     }
                     else{
                         $ccs_id = DB::table("class_course_schedule")
