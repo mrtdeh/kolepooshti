@@ -61,19 +61,27 @@ class MeetingController extends Controller
         $user = User::find($req->uid);
 // dd($meeting);
 
-        if (!empty($meeting)){
-        
-            return redirect()->to(
-                Bigbluebutton::start([
-                        
-                    'meetingID' => $meeting->meeting_code,
-                    'meetingName' =>  $req->mn,
-                    'attendeePW' => 'attendeepw',
-                    'moderatorPW' => 'moderatorpw',
-                    'userName' => $user->fullName
-                ])
-            );
+        if (empty($meeting)){
+            $meeting_id = rand(10000000,999999999);
+            Meeting::create([
+                "ccs_id" =>  $ccs_id,
+                "meeting_code" => $meeting_id,
+                
+            ]);
+        }else {
+            $meeting_id = $meeting->meeting_code;
         }
+
+        return redirect()->to(
+            Bigbluebutton::start([
+                    
+                'meetingID' =>  $meeting_id,
+                'meetingName' =>  $req->mn,
+                'attendeePW' => 'attendeepw',
+                'moderatorPW' => 'moderatorpw',
+                'userName' => $user->fullName
+            ])
+        );
 
         return "sdf";
     }
@@ -198,7 +206,7 @@ class MeetingController extends Controller
                 $dayNumber = jdate('today')->toArray()["dayOfWeek"];
                 // echo $dayNumber;
                 $is_at_this_day = $dayNumber  == $s->day;
-                echo "<br>day = " . $is_at_this_day."<br>";
+                // echo "<br>day = " . $is_at_this_day."<br>";
                 // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
   
                 if ($is_at_this_day && $is_at_this_time){
