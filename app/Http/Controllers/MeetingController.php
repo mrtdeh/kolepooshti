@@ -72,6 +72,8 @@ class MeetingController extends Controller
 
     private function enter( $user , $ccs_id , $meeting_name )
     {
+        
+        $meeting_id = 0;
 
         $meeting = Meeting::where("ccs_id","=",$ccs_id)
         ->orderBy('id', 'desc')
@@ -86,7 +88,7 @@ class MeetingController extends Controller
         
         if (empty($meeting_id)){
 
-            $meeting_id = rand(10000000,999999999);
+            $meeting_id = rand(1000000000,9999999999);
             Meeting::create([
                 "ccs_id" =>  $ccs_id,
                 "meeting_code" => $meeting_id,
