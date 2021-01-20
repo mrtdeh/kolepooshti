@@ -57,38 +57,76 @@ class MeetingController extends Controller
         $meeting = Meeting::where("ccs_id","=",$ccs_id)
         ->orderBy('id', 'desc')
         ->first();
+        // dd($meeting);
+        
+
+        if(!empty($meeting)){
+            $meeting_id = $meeting->meeting_code;
+            // dd($meeting);
+        }
+
+        $meeting_name =  $req->mn;
 
         $user = User::find($req->uid);
-// dd($meeting);
 
-        if (empty($meeting)){
+        $this->enter( $user  , $meeting_id, $meeting_name);
+        
+
+        return "Selcted meeting not found";
+    }
+
+
+//=========================================================================================
+
+
+    private function enter( $user , $meeting_id , $meeting_name )
+    {
+        
+        if (empty($meeting_id)){
+
             $meeting_id = rand(10000000,999999999);
             Meeting::create([
                 "ccs_id" =>  $ccs_id,
                 "meeting_code" => $meeting_id,
                 
             ]);
-        }else {
-            $meeting_id = $meeting->meeting_code;
         }
 
-        return redirect()->to(
-            Bigbluebutton::start([
-                    
-                'meetingID' =>  $meeting_id,
-                'meetingName' =>  $req->mn,
-                'attendeePW' => 'attendeepw',
-                'moderatorPW' => 'moderatorpw',
-                'userName' => $user->fullName
-            ])
-        );
+        Bigbluebutton::create([
+        
+            'meetingID' => $meeting_id,
+            'meetingName' =>  $meetingName,
+            'attendeePW' => 'attendeepw',
+            'moderatorPW' => 'moderatorpw',
+            'userName' => $user->fullName
+        ]);
+   
 
-        return "sdf";
+        if ( $userType == "student" ){
+
+            // dd($meeting_id);
+            return redirect()->to(
+                Bigbluebutton::join([
+                    'meetingID' => $meeting_id,
+                    'userName' => $user->fullName,
+                    'password' => 'attendeepw' 
+                ])
+            );
+
+        }
+        else {
+            
+            
+            return redirect()->to(
+                Bigbluebutton::join([
+                    'meetingID' => $meeting_id,
+                    'userName' => $user->fullName,
+                    'password' => 'moderatorpw' 
+                ])
+            );
+        }
+        
     }
-
-
-//=========================================================================================
-
     
     // public function nextMeetingInfo()
     // {
@@ -220,30 +258,21 @@ class MeetingController extends Controller
                             ["teacher_id","=",$user->id],
                             ["schedule_id","=",$s->id]])->first();
                             
-                        if(!empty($ccs))
-                            $ccs_id = $ccs->id;
-                            
-                        
-                        if(empty($ccs_id)) dd([
-                            ["class_id","=",$room->id],
-                            ["teacher_id","=",$user->id],
-                            ["schedule_id","=",$s->id]]);
                     }
                     else{
                         $ccs = DB::table("class_course_schedule")
                         ->where([
                             ["class_id","=",$room->id],
-                            ["schedule_id","=",$s->id]])->first();   
-
-                        if(!empty($ccs))
-                            $ccs_id = $ccs->id;
-                            
-                        
+                            ["schedule_id","=",$s->id]])->first();      
                     }
 
+
+                    if(!empty($ccs))
+                        $ccs_id = $ccs->id;
+
                    
-                    echo "ccs = " . $ccs_id;
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
+                    // echo "ccs = " . $ccs_id;
 
                     if(!empty($ccs))
                         array_push($target_schedules , [
@@ -255,6 +284,9 @@ class MeetingController extends Controller
 
               
             }
+
+
+           
 
             
         }
@@ -285,59 +317,9 @@ class MeetingController extends Controller
             }
 
 
-        // Check user as Student or Teacher to join in room
+            $this->enter( $user , $meeting_id, $meetingName);
+        
 
-
-            if (empty($meeting_id)){
-
-                $meeting_id = rand(10000000,999999999);
-                Meeting::create([
-                    "ccs_id" =>  $ccs_id,
-                    "meeting_code" => $meeting_id,
-                    
-                ]);
-            }
-
-            $password = $userType == "student" ? "attendeepw" : "moderatorpw";
-
-            // return redirect()->to(
-            Bigbluebutton::create([
-            
-                'meetingID' => $meeting_id,
-                'meetingName' =>  $meetingName,
-                'attendeePW' => 'attendeepw',
-                'moderatorPW' => 'moderatorpw',
-                'userName' => $user->fullName
-            ]);
-                    // );
-                // }
-            // }
-
-           
-
-            if ( $userType == "student" ){
-
-                // dd($meeting_id);
-                return redirect()->to(
-                    Bigbluebutton::join([
-                        'meetingID' => $meeting_id,
-                        'userName' => $user->fullName,
-                        'password' => 'attendeepw' 
-                    ])
-                );
-
-            }
-            else {
-                
-                
-                return redirect()->to(
-                    Bigbluebutton::join([
-                        'meetingID' => $meeting_id,
-                        'userName' => $user->fullName,
-                        'password' => 'moderatorpw' 
-                    ])
-                );
-            }
         }
 
 
