@@ -175,7 +175,7 @@ class MeetingController extends Controller
             foreach ($schedules as $i => $s) {
 
                 
-                echo "schedule $i = " . $s->id . "<br>";
+                // echo "schedule $i = " . $s->id . "<br>";
 
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
