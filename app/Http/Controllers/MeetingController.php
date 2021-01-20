@@ -82,49 +82,46 @@ class MeetingController extends Controller
     private function enter( $user , $meeting_id , $meeting_name )
     {
         
-        if (empty($meeting_id)){
+        if(!empty($meeting_id)){
 
-            $meeting_id = rand(10000000,999999999);
-            Meeting::create([
-                "ccs_id" =>  $ccs_id,
-                "meeting_code" => $meeting_id,
-                
+
+
+            Bigbluebutton::create([
+            
+                'meetingID' => $meeting_id,
+                'meetingName' =>  $meeting_name,
+                'attendeePW' => 'attendeepw',
+                'moderatorPW' => 'moderatorpw',
+                'userName' => $user->fullName
             ]);
+    
+
+            if ( $userType == "student" ){
+
+                // dd($meeting_id);
+                return redirect()->to(
+                    Bigbluebutton::join([
+                        'meetingID' => $meeting_id,
+                        'userName' => $user->fullName,
+                        'password' => 'attendeepw' 
+                    ])
+                );
+
+            }
+            else {
+                
+                
+                return redirect()->to(
+                    Bigbluebutton::join([
+                        'meetingID' => $meeting_id,
+                        'userName' => $user->fullName,
+                        'password' => 'moderatorpw' 
+                    ])
+                );
+            }
         }
 
-        Bigbluebutton::create([
-        
-            'meetingID' => $meeting_id,
-            'meetingName' =>  $meetingName,
-            'attendeePW' => 'attendeepw',
-            'moderatorPW' => 'moderatorpw',
-            'userName' => $user->fullName
-        ]);
-   
-
-        if ( $userType == "student" ){
-
-            // dd($meeting_id);
-            return redirect()->to(
-                Bigbluebutton::join([
-                    'meetingID' => $meeting_id,
-                    'userName' => $user->fullName,
-                    'password' => 'attendeepw' 
-                ])
-            );
-
-        }
-        else {
-            
-            
-            return redirect()->to(
-                Bigbluebutton::join([
-                    'meetingID' => $meeting_id,
-                    'userName' => $user->fullName,
-                    'password' => 'moderatorpw' 
-                ])
-            );
-        }
+        return "Selected meeting id not valid";
         
     }
     
@@ -314,6 +311,16 @@ class MeetingController extends Controller
             if(!empty($meeting)){
                 $meeting_id = $meeting->meeting_code;
                 // dd($meeting);
+            }
+
+            if (empty($meeting_id)){
+
+                $meeting_id = rand(10000000,999999999);
+                Meeting::create([
+                    "ccs_id" =>  $ccs_id,
+                    "meeting_code" => $meeting_id,
+                    
+                ]);
             }
 
 
