@@ -46,7 +46,7 @@ class User extends Authenticatable
         if ($this->attributes["type"] == "teacher")
 
             return $this->belongsToMany( ClassRoom::class , "class_course_schedule" , "teacher_id", "class_id")
-           ->withPivot("schedule_id")
+            ->groupBy("id")->withPivot("schedule_id")
             ->where("schedule_id","!=","");
             // return DB::table("class_course_schedule")->where("teacher_id","=",$id);
 
