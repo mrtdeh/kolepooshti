@@ -14,9 +14,12 @@
             </h4>
             
             @foreach ($target_schedules as $i => $s)
-            <a target="_blank" href="/meeting/select?uid={{ $user->id }}&ccs={{ $s["ccs_id"] }}&mn={{ $s["meetingName"] }}">
-                {{  $s["meetingName"] }} </a><br>
-                @endforeach
+                <a 
+                target="_blank" 
+                href="/meeting/select?uid={{ $user->id }}
+                &ccs={{ $s["ccs_id"] }}&mn={{ $s["meetingName"] }}">
+                    {{  $s["meetingName"] }} </a><br>
+            @endforeach
     </div>
 
     <style>

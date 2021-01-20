@@ -233,10 +233,11 @@ class MeetingController extends Controller
 
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
 
-                    array_push($target_schedules , [
-                        "ccs_id" => $ccs_id,
-                        "meetingName" => $meetingName,
-                    ]);
+                    if(!empty($ccs_id))
+                        array_push($target_schedules , [
+                            "ccs_id" => $ccs_id,
+                            "meetingName" => $meetingName,
+                        ]);
                 
                 }
 
