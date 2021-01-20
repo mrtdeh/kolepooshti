@@ -125,69 +125,7 @@ class MeetingController extends Controller
         
     }
     
-    // public function nextMeetingInfo()
-    // {
-        
-    //     $target_schedules = [];
-    //     $next_schedule = "";
-    //     $user = auth()->user();
-    //     $userType = $user->type;
-    //     // Fetch All course Times for this User
-    //     $rooms = $user->rooms()->get();
-        
-        
-    //     // dd($rooms);
-    //     foreach ($rooms as $key => $room) {
-            
-           
-    //         $room = ClassRoom::with("schedules")->find($room->id);
-            
-
-    //         $schedules = $room->schedules;
-             
-    //         // Fetch Meeting Times in this Time
-    //         foreach ($schedules as $i => $s) {
-
-
-    //             $a = strtotime($s->start);
-    //             $b = strtotime($s->end);
-    //             $nowTime  = time();
-
-    //             // Check if time is now
-    //             $is_at_this_time = $nowTime >= $a && $nowTime < $b;
-
-    //             $is_at_next_time = $nowTime < $a && $nowTime < $b;
-
-                
-
-    //             // Check if today
-    //             $dayNumber = jdate('today')->toArray()["dayOfWeek"];
-    //             // echo $dayNumber;
-    //             $is_at_this_day = $dayNumber  == $s->day;
-
-    //             // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
-    //             // echo $is_at_this_day;
-    //             if ($is_at_this_day && $is_at_this_time){
-                
-    //                 array_push($target_schedules , $s);
-
-                    
-    //             }
-
-    //             if ($is_at_next_time){
-    //                 // if( $next_schedule )
-    //                 $next_schedule = $s;
-    //             }
-    //         }
-    //     }
-        
-    //     return count($target_schedules) ? $target_schedules : $next_schedule;
-
-    // }
-
-
-
-
+    
 
 
     private function bbb_enter( $user )
@@ -225,28 +163,17 @@ class MeetingController extends Controller
                 $a = strtotime($s->start);
                 $b = strtotime($s->end);
                 $nowTime  = time();
-
                 // Check if time is now
                 $is_at_this_time = $nowTime >= $a && $nowTime < $b;
-            //   print( $s->start);
-            //   print( $s->end);
-            //   echo "a = "  .jdate($a )->format("h:M");
-            //     echo "<br>time = " . ($is_at_this_time ? "1":"0");
-
-                // $is_at_next_time = $nowTime < $a && $nowTime < $b;
-
-                
-
                 // Check if today
                 $dayNumber = jdate('today')->toArray()["dayOfWeek"];
-                // echo $dayNumber;
                 $is_at_this_day = $dayNumber  == $s->day;
-                // echo "<br>day = " . $is_at_this_day."<br>";
-                // dd(jdate('W')->addDays(5)->getTimestamp()%2==1);
   
+
+
+
                 if ($is_at_this_day && $is_at_this_time){
-                // dd("DDDDDDDDD");
-                    
+
                     $ccs = null;
                     if ($userType == "teacher"){
                         $ccs = DB::table("class_course_schedule")
@@ -269,29 +196,24 @@ class MeetingController extends Controller
 
                    
                     $meetingName =  $room->name. ' - ' . $s->course()->name;
-                    // echo "ccs = " . $ccs_id;
+
 
                     if(!empty($ccs))
                         array_push($target_schedules , [
                             "ccs_id" => $ccs_id,
                             "meetingName" => $meetingName,
                         ]);
+
+
+
                 
                 }
-
-              
             }
-
-
-           
-
-            
         }
-// dd();
 
 
 
-
+dd($target_schedules);
 
         if (!empty($target_schedules)){
 
