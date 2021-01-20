@@ -60,7 +60,7 @@ class MeetingController extends Controller
 
         $user = User::find($req->uid);
 
-        return $this->enter( $user  , $ccs_id, $meeting_name);
+        return $this->enterSpecify( $user  , $ccs_id, $meeting_name);
         
 
         return "Selcted meeting not found";
@@ -70,7 +70,7 @@ class MeetingController extends Controller
 //=========================================================================================
 
 
-    private function enter( $user , $ccs_id , $meeting_name )
+    private function enterSpecify( $user , $ccs_id , $meeting_name )
     {
         
         $meeting_id = 0;
@@ -148,29 +148,21 @@ class MeetingController extends Controller
         $meetingName = "";
         $ccs_id = 0;
         $next_schedule = "";
-        // $user = auth()->user();
         $userType = $user->type;
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
 
         $room_checkout = [];
-        // dd(  $user->id);
-    //   dd($user->rooms()->distinct()->get());
+
         foreach ($rooms as $key => $room) {
 
             if (in_array($room->id ,   $room_checkout)) continue;
 
             array_push( $room_checkout , $room->id );
-            // dd($room->schedules);
-            // echo "room $key = " . $room->id. "<br>";
+
             $room = ClassRoom::with("schedules")->find($room->id);
-           
-            // if($room->id != 1)
-            // dd($room );
             
             $schedules = $room->schedules;
-            
-            
             // Fetch Meeting Times in this Time
             foreach ($schedules as $i => $s) {
 
@@ -185,7 +177,6 @@ class MeetingController extends Controller
                 // Check if today
                 $dayNumber = jdate('today')->toArray()["dayOfWeek"];
                 $is_at_this_day = $dayNumber  == $s->day;
-  
 
 
 
@@ -211,24 +202,14 @@ class MeetingController extends Controller
                     if(!empty($ccs)){
 
                         $ccs_id = $ccs->id;
-
                         $meetingName =  $room->name. ' - ' . $s->course()->name;
 
-                    }
-
-                   
-                    
-
-
-                    if(!empty($ccs))
                         array_push($target_schedules , [
                             "ccs_id" => $ccs_id,
                             "meetingName" => $meetingName,
                         ]);
+                    }
 
-
-
-                
                 }
             }
         }
@@ -257,20 +238,8 @@ class MeetingController extends Controller
                 // dd($meeting);
             }
 
-            // dd($meeting_id);
 
-            // if (empty($meeting_id)){
-
-            //     $meeting_id = rand(10000000,999999999);
-            //     Meeting::create([
-            //         "ccs_id" =>  $ccs_id,
-            //         "meeting_code" => $meeting_id,
-                    
-            //     ]);
-            // }
-
-
-            return $this->enter( $user , $ccs_id, $meetingName);
+            return $this->enterSpecify( $user , $ccs_id, $meetingName);
         
 
         }
