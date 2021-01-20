@@ -141,7 +141,7 @@ class MeetingController extends Controller
         // Fetch All course Times for this User
         $rooms = $user->rooms()->get();
         // dd(  $user->id);
-      
+      dd($user->rooms()->distinct());
         foreach ($rooms as $key => $room) {
 
             // dd($room->schedules);
