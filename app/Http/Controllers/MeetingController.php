@@ -191,11 +191,16 @@ class MeetingController extends Controller
                     }
 
 
-                    if(!empty($ccs))
+                    if(!empty($ccs)){
+
                         $ccs_id = $ccs->id;
 
+                        $meetingName =  $room->name. ' - ' . $s->course()->name;
+
+                    }
+
                    
-                    $meetingName =  $room->name. ' - ' . $s->course()->name;
+                    
 
 
                     if(!empty($ccs))
