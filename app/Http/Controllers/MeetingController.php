@@ -69,7 +69,7 @@ class MeetingController extends Controller
 
         $user = User::find($req->uid);
 
-        $this->enter( $user  , $meeting_id, $meeting_name);
+        return $this->enter( $user  , $meeting_id, $meeting_name);
         
 
         return "Selcted meeting not found";
@@ -248,7 +248,7 @@ class MeetingController extends Controller
             }
 
 
-            $this->enter( $user , $meeting_id, $meetingName);
+            return $this->enter( $user , $meeting_id, $meetingName);
         
 
         }
