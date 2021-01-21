@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
@@ -36,6 +37,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public $timestamps = true;
     
     
 
@@ -78,5 +81,15 @@ class User extends Authenticatable
         return $this->attributes["fname"] . " " . $this->attributes["lname"];
     }
 
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
     
 }

@@ -25,7 +25,9 @@ use App\Http\Controllers\LanguageController;
 Route::post('/meeting/check', 'MeetingController@check');
 Route::get('/meetig/list', 'MeetingController@list');
 Route::get('/meeting/select', 'MeetingController@select');
-Route::get('/', 'LoginController@login');
+Route::get('/', 'LoginController@login')->name("login");
+Route::get('/reset-password', 'LoginController@showReset');
+Route::post('/reset-password/reset', 'LoginController@reset');
 
 Route::get('/test',function(){
     return redirect()->to(Bigbluebutton::hooksCreate([
@@ -67,29 +69,28 @@ Route::get("/runsql",function(){
 
     $sdb = DB::connection("mysql2");
 
-    $course = Course::firstOrCreate([ "name" => "کلاس آزمایشی " ]);
-    $schedule = Schedule::firstOrCreate([
-        "start" => "11:00",
-        "end" =>  "14:30",
-        "type" => "0",
-        "day" => "5",
-        ]);
-    $teacher = User::where( "username" ,"=","4420724870" )->first();
-    $rooms = ClassRoom::where('name' ,'like', 'دهم%')
-    ->orWhere('name' ,'like', 'یازدهم%')->get();
-
-    // $rooms = Base::with("rooms")->find([1,2]);
     
-    // dd($course);
 
-    foreach ($rooms as $key => $r) {
-        ClassRoom::addCourse([
-            "class_id" => $r->id,
-            "course_id" => $course->id,
-            "teacher_id" => $teacher->id,
-            "schedule_id" => $schedule->id,
-        ]);
-    }
+    // $course = Course::firstOrCreate([ "name" => "کلاس آزمایشی " ]);
+    // $schedule = Schedule::firstOrCreate([
+    //     "start" => "11:00",
+    //     "end" =>  "14:30",
+    //     "type" => "0",
+    //     "day" => "5",
+    //     ]);
+    // $teacher = User::where( "username" ,"=","4420724870" )->first();
+    // $rooms = ClassRoom::where('name' ,'like', 'دهم%')
+    // ->orWhere('name' ,'like', 'یازدهم%')->get();
+    // foreach ($rooms as $key => $r) {
+    //     ClassRoom::addCourse([
+    //         "class_id" => $r->id,
+    //         "course_id" => $course->id,
+    //         "teacher_id" => $teacher->id,
+    //         "schedule_id" => $schedule->id,
+    //     ]);
+    // }
+
+
 
 
     // $users =  $sdb->table('users')->get();

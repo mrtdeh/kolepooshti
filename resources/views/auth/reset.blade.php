@@ -13,45 +13,35 @@
 @section('content')
 <div id="login-page" class="row">
     <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-        <form class="login-form" method="POST" action="/meeting/check">
+        <form class="login-form" method="POST" action="/reset-password/reset">
             @csrf
+        <input type="hidden" name="uid" value="{{ $user->id }}">
             <div class="row">
                 <div class="pt-4 col s12">
                     <img src="{{ asset('images/logo/logo.png') }}" alt="لوگو کوله پشتی" width="100" class="m-auto flexbox">
-                    <h5 class="center">{{ __('ورود به سامانه') }}</h5>
+                    <h5 class="center">{{ __('بروزرسانی رمز') }}</h5>
                     <h6 class="mt-5 center">کوله پشتی مدرسه شاهد رمضانزاده</h6>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="pt-4 col s12">
-                    
-                    <small class="green-text ml-10 center" role="alert"> 
-                        {{ session("message") }}</small>
-                    
-                </div>
-            </div>
-
-            
-            
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="far fa-user prefix pt-2"></i>
-                    <input id="email" type="text" class=" @error('text') is-invalid @enderror" name="username"
-                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-                    <label for="email" class="center-align">{{ __('نام کاربری') }}</label>
-                    @error('email')
+                <h6 class="mt-5 text-right">  </h6>
+                    {{-- <input id="email" type="text" class=" @error('text') is-invalid @enderror" name="username"
+                        value="{{ old('email') }}" required autocomplete="email" autofocus> --}}
+                    <label for="email" class="center-align" style="color:black;">
+                        {{ $user->username }}</label><br>
                     <small class="red-text ml-10" role="alert">
-                        {{ $message }}
+                        {{ $user->fullName }}
                     </small>
-                    @enderror
+                   
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="far fa-lock-alt prefix pt-2"></i>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                        name="password" required autocomplete="current-password">
+                        name="password" required autocomplete="off">
                     <label for="password">{{ __('رمزعبور') }}</label>
                     @error('password')
                     <small class="red-text ml-10" role="alert">
@@ -59,8 +49,19 @@
                     </small>
                     @enderror
                 </div>
+                <div class="input-field col s12">
+                    <i class="far fa-lock-alt prefix pt-2"></i>
+                    <input id="retrypassword" type="password" class="form-control @error('retrypassword') is-invalid @enderror"
+                        name="password_confirmation" required autocomplete="off">
+                    <label for="retrypassword">{{ __('تکرار رمز عبور') }}</label>
+                    @error('password_confirmation')
+                    <small class="red-text ml-10" role="alert">
+                        {{ $message }}
+                    </small>
+                    @enderror
+                </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col s12 m12 l12 ml-2 mt-1">
                     <p>
                         <label>
@@ -69,7 +70,7 @@
                         </label>
                     </p>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 {{-- <div class="input-field col s12">
                     <button type="submit"
@@ -78,7 +79,8 @@
                 </div> --}}
                 <div class="input-field col s12">
                     <button type="submit"
-                        class="btn waves-effect waves-light border-round gradient-45deg-indigo-purple col s12">ورود سریع به کلاس آنلاین
+                        class="btn waves-effect waves-light border-round gradient-45deg-indigo-purple col s12">
+                        تغییر رمز
                     </button>
                 </div>
             </div>

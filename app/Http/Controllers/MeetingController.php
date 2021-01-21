@@ -8,6 +8,7 @@ use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
 class MeetingController extends Controller
@@ -17,28 +18,44 @@ class MeetingController extends Controller
 
     public function check()
     {
-
+        // return redirect("/")->with('message', "گذرواژه شما با موفقیت تغییر یافت.");
      
+        try{
 
 
-        $credentials = request()->only('username', 'password');
+            $credentials = request()->only('username', 'password');
 
-        if ( Auth::attempt($credentials)) {
+            if ( Auth::attempt($credentials)) {
 
-            $user = Auth::user();
+                $user = Auth::user();
 
-    
-            if ($user->type == "admin") return redirect("/panel");
+                // Reset password if user profile updated  date is no longer than 15 day
+                $userDate = ($user->updated_at);
+                $now = now();
+                if($now->diff($userDate)->days > 15){
+
+                    session(['user'=> $user->id]);
+                    return redirect("/reset-password");
+                }
+                // if($userDate 
 
         
-            return $this->bbb_enter( $user );
-            
-        }else{
+                if ($user->type == "admin") return redirect("/panel");
 
-            return back()->withErrors([
-                'username' => 'نام کاربری و گذرواژه اشتباه است',
-            ]);
+            
+                return $this->bbb_enter( $user );
+                
+            }else{
+
+                return back()->withErrors([
+                    'username' => 'نام کاربری و گذرواژه اشتباه است',
+                ]);
+            }
+        }catch(Exeption $e){
+
+            return back();
         }
+        
     }
 
 
