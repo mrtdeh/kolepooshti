@@ -2,9 +2,11 @@
 
 <?php
 
+use App\Models\Base;
 use App\Models\Time;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Schedule;
 use App\Models\ClassRoom;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\LanguageController;
@@ -65,7 +67,29 @@ Route::get("/runsql",function(){
 
     $sdb = DB::connection("mysql2");
 
- 
+    $course = Course::firstOrCreate([ "name" => "کلاس آزمایشی ۱" ]);
+    $schedule = Schedule::firstOrCreate([
+        "start" => "11:00",
+        "end" =>  "14:30",
+        "type" => "0",
+        "day" => "5",
+        ]);
+    $teacher = User::where( "username" ,"=","4420559179" )->first();
+    $rooms = ClassRoom::where('name' ,'like', 'دهم%')
+    ->orWhere('name' ,'like', 'یازدهم%')->get();
+
+    // $rooms = Base::with("rooms")->find([1,2]);
+    
+    // dd($course);
+
+    foreach ($rooms as $key => $r) {
+        ClassRoom::addCourse([
+            "class_id" => $r->id,
+            "course_id" => $course->id,
+            "teacher_id" => $teacher->id,
+            "schedule_id" => $schedule->id,
+        ]);
+    }
 
 
     // $users =  $sdb->table('users')->get();
@@ -100,15 +124,15 @@ Route::get("/runsql",function(){
     //         }
     //     }
 
-         $users = $sdb->table('room_user')->where("room_id","=",request()->id)->get();
-         $room = $sdb->table('rooms')->where("id","=",request()->id)->first();
-         echo "room : " . $room->name ."<br><br>";
-        foreach ($users as $key => $u) {
+        //  $users = $sdb->table('room_user')->where("room_id","=",request()->id)->get();
+        //  $room = $sdb->table('rooms')->where("id","=",request()->id)->first();
+        //  echo "room : " . $room->name ."<br><br>";
+        // foreach ($users as $key => $u) {
             
-            $user = $sdb->table('users')->where("id","=",$u->user_id)->first();
+        //     $user = $sdb->table('users')->where("id","=",$u->user_id)->first();
             
-            echo "<br>".$user->fname . " " . $user->lname . " : " . $user->username;
-        }
+        //     echo "<br>".$user->fname . " " . $user->lname . " : " . $user->username;
+        // }
     
 
     // $courses = $sdb->table('meetings')->select('name')->groupBy('name')->get();

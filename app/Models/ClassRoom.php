@@ -94,7 +94,7 @@ class ClassRoom extends Model
     public static function addCourse( $rows = [] )
     { 
 
-        DB::table("class_course_schedule")->insert($rows);
+        DB::table("class_course_schedule")->insertOrIgnore($rows);
     }
   
 }
