@@ -42,7 +42,7 @@
                     <i class="far fa-lock-alt prefix pt-2"></i>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                         name="password" required autocomplete="off">
-                    <label for="password">{{ __('رمزعبور') }}</label>
+                    <label for="password">{{ __('رمز عبور جدید') }}</label>
                     @error('password')
                     <small class="red-text ml-10" role="alert">
                         {{ $message }}
@@ -53,7 +53,7 @@
                     <i class="far fa-lock-alt prefix pt-2"></i>
                     <input id="retrypassword" type="password" class="form-control @error('retrypassword') is-invalid @enderror"
                         name="password_confirmation" required autocomplete="off">
-                    <label for="retrypassword">{{ __('تکرار رمز عبور') }}</label>
+                    <label for="retrypassword">{{ __('تکرار رمز عبور جدید') }}</label>
                     @error('password_confirmation')
                     <small class="red-text ml-10" role="alert">
                         {{ $message }}

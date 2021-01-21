@@ -44,10 +44,11 @@ class LoginController extends Controller
 
         $req = $this->validate( $req,[
             
-            "password" => "confirmed|min:6",
+            "password" => "required|min:6",
+            "password_confirmation" => "required|some:password"
         ],[
             
-        "password.confirmed" => "رمز وارد شده مطابقت ندارد",
+        "password_confirmation.some" => "رمز وارد شده مطابقت ندارد",
         "password.min" => "باید حداقل ۶ کارکتر باشد",
         
         ]);
