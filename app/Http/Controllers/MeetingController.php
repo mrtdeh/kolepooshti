@@ -30,9 +30,9 @@ class MeetingController extends Controller
                 $user = Auth::user();
 
                 // Reset password if user profile updated  date is no longer than 15 day
-                $userDate = ($user->updated_at);
+                $userDate = $user->updated_at;
                 $now = now();
-                if($now->diff($userDate)->days > 15){
+                if(empty( $userDate) || $now->diff($userDate)->days > 15){
 
                     session(['user'=> $user->id]);
                     return redirect("/reset-password");
