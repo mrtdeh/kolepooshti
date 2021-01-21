@@ -67,7 +67,7 @@ class LoginController extends Controller
         $user->save();
 
         
-
-        return redirect("/")->with('message', "گذرواژه شما با موفقیت تغییر یافت");
+        session(['message'=> "گذرواژه شما با موفقیت تغییر یافت"]);
+        return redirect("/");
     }
 }
