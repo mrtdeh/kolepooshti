@@ -67,14 +67,14 @@ Route::get("/runsql",function(){
 
     $sdb = DB::connection("mysql2");
 
-    $course = Course::firstOrCreate([ "name" => "کلاس آزمایشی ۱" ]);
+    $course = Course::firstOrCreate([ "name" => "کلاس آزمایشی " ]);
     $schedule = Schedule::firstOrCreate([
         "start" => "11:00",
         "end" =>  "14:30",
         "type" => "0",
         "day" => "5",
         ]);
-    $teacher = User::where( "username" ,"=","4420559179" )->first();
+    $teacher = User::where( "username" ,"=","4420724870" )->first();
     $rooms = ClassRoom::where('name' ,'like', 'دهم%')
     ->orWhere('name' ,'like', 'یازدهم%')->get();
 
