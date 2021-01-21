@@ -30,8 +30,9 @@ Route::get('/reset-password', 'LoginController@showReset');
 Route::post('/reset-password/reset', 'LoginController@reset');
 
 Route::get('/test',function(){
-    return redirect()->to(Bigbluebutton::hooksCreate([
-        'callbackURL' => 'https://shahedrz.kolepooshti.ir/hook', //required
+    return dd(Bigbluebutton::hooksCreate([
+        'callbackURL' => 'https://webhook.site/625f4cf7-2e55-4803-98a3-e92f2d65c72b', //required
+      
   ]));
 });
 
