@@ -37,7 +37,7 @@ class MeetingController extends Controller
                     session(['user'=> $user->id]);
                     return redirect("/reset-password");
                 }
-                // if($userDate 
+                
 
         
                 if (in_array($user->type ,["admin" ,"dev","deputy"])) return redirect("/panel");
@@ -265,7 +265,7 @@ class MeetingController extends Controller
 
 
 
-        return "meeting not found in this time";
+        return redirect()->route("login")->with(["message" => "کاربر عزیز شما با موفقیت وارد شده اید ."]);
     }
 
 

@@ -122,26 +122,27 @@ Route::get("/runsql",function(){
     // }
 
 
-
-    // $rooms = $sdb->table('rooms')->get();
-    // // dd($rooms);
-    // foreach ($rooms as $key => $u) {
-    //     ClassRoom::create((array)$u);
-    // }
-
-    // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-    // DB::table('class_user')->delete();
-    // DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+    DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+    DB::table('class')->delete();
+    DB::table('class_user')->delete();
+    DB::statement('SET FOREIGN_KEY_CHECKS = 1');
    
 
+    $rooms = $sdb->table('rooms')->get();
+    // dd($rooms);
+    foreach ($rooms as $key => $u) {
+        ClassRoom::create((array)$u);
+    }
+
+
     
-    // $users = $sdb->table('users')
-    // ->join("room_user","users.id","=","room_user.user_id")->get();
-    // // ->where("users.type","=","student")->orWhere("users.type","=","deputy")->get();
-    // foreach ($users as $key => $s) {
+    $users = $sdb->table('users')
+    ->join("room_user","users.id","=","room_user.user_id")->get();
+    // ->where("users.type","=","student")->orWhere("users.type","=","deputy")->get();
+    foreach ($users as $key => $s) {
         
-    //     ClassRoom::find($s->room_id)->users()->attach($s->user_id);
-    // }
+        ClassRoom::find($s->room_id)->users()->attach($s->user_id);
+    }
 
     // $users = $sdb->table('users')->get();
     //     foreach ($users as $key => $u) {
