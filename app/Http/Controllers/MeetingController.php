@@ -40,7 +40,7 @@ class MeetingController extends Controller
                 // if($userDate 
 
         
-                if ($user->type == "admin") return redirect("/panel");
+                if (in_array($user->type ,["admin" ,"dev","deputy"])) return redirect("/panel");
 
             
                 return $this->bbb_enter( $user );

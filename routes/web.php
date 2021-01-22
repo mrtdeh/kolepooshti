@@ -96,16 +96,35 @@ Route::get("/runsql",function(){
     //     ]);
     // }
 
-
+    // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+    // // DB::table('users')->delete();
+    // DB::table('users')->delete();
+    // DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+   
+   
 
 
     // $users =  $sdb->table('users')->get();
-    // dd(count($users));
+    // // dd(count($users));
     // foreach ($users as $key => $u) {
-    //     User::create((array)$u);
+    //     User::firstOrCreate(["username" => $u->username],[
+    //         "fname" => $u->first_name,
+    //         "lname" => $u->last_name,
+            
+    //         "mobile" => $u->phone,
+    //         "password" => $u->password,
+    //         "email" => $u->email,
+    //         "avatar" => $u->avatar,
+    //         "created_at" => $u->created_at,
+    //         "updated_at" => $u->updated_at,
+         
+    //     ]);
     // }
 
+
+
     // $rooms = $sdb->table('rooms')->get();
+    // // dd($rooms);
     // foreach ($rooms as $key => $u) {
     //     ClassRoom::create((array)$u);
     // }
@@ -120,6 +139,7 @@ Route::get("/runsql",function(){
     // ->join("room_user","users.id","=","room_user.user_id")->get();
     // // ->where("users.type","=","student")->orWhere("users.type","=","deputy")->get();
     // foreach ($users as $key => $s) {
+        
     //     ClassRoom::find($s->room_id)->users()->attach($s->user_id);
     // }
 
