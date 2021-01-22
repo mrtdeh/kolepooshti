@@ -132,6 +132,7 @@ class MeetingController extends Controller
                 Bigbluebutton::join([
                     'meetingID' => $meeting_id,
                     'userName' => $user->fullName,
+                    'userID' => $user->id,
                     'password' => 'attendeepw' 
                 ])
             );
@@ -144,6 +145,7 @@ class MeetingController extends Controller
                 Bigbluebutton::join([
                     'meetingID' => $meeting_id,
                     'userName' => $user->fullName,
+                    'userID' => $user->id,
                     'password' => 'moderatorpw' 
                 ])
             );

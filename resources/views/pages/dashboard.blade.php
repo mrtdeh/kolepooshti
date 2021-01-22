@@ -81,7 +81,7 @@
                             </div>
                             <div class="card-content">
                                 <p>
-                                    تیزر معرفی دبیرستان دوره دوم شاهد شهید رمضانزاده (سه راه آبنما)
+                                    تیزر معرفی دبیرستان دوره دوم  (سه راه آبنما)
                                 </p>
                             </div>
                             <div class="card-action">
@@ -131,7 +131,7 @@
                             </div>
                             <div class="card-content">
                                 <p>
-                                    حضور فارغ التحصیلان رشته ریاضی سال تحصیلی ۹۷- ۹۸ دبیرستان پسرانه شاهد شهید رمضانزاده
+                                    حضور فارغ التحصیلان رشته ریاضی سال تحصیلی ۹۷- ۹۸ دبیرستان پسرانه 
                                 </p>
                             </div>
                             <div class="card-action">
@@ -283,8 +283,8 @@
             <div class="col s12">
                 <div class="card animate fadeLeft">
                     <div class="card-content center yellow">
-                        <img src="{{ asset('images/logo/shahed-logo.png') }}" width="100" alt="لوگوی شاهد رمضانزاده">
-                        <h6 class="card-title font-weight-400">مدرسه شاهد رمضانزاده</h6>
+                        <img src="{{ asset('images/logo/shahed-logo.png') }}" width="100" alt="لوگوی {{ config('kolepooshti.schoolType') .  config('kolepooshti.schoolName') }}">
+                        <h6 class="card-title font-weight-400">مدرسه {{ config('kolepooshti.schoolType') .  config('kolepooshti.schoolName') }}</h6>
                         <p>دبیرستان دوره دوم</p>
                     </div>
                     <div class="card-tabs">

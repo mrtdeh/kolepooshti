@@ -19,7 +19,8 @@
                 <div class="pt-4 col s12">
                     <img src="{{ asset('images/logo/logo.png') }}" alt="لوگو کوله پشتی" width="100" class="m-auto flexbox">
                     <h5 class="center">{{ __('ورود به سامانه') }}</h5>
-                    <h6 class="mt-5 center">کوله پشتی مدرسه شاهد رمضانزاده</h6>
+                <h6 class="mt-5 center">
+                    کوله پشتی مدرسه {{ config('kolepooshti.schoolType') .  config('kolepooshti.schoolName') }}</h6>
                 </div>
             </div>
 
