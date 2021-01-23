@@ -102,13 +102,13 @@ class MeetingController extends Controller
         ->first();
         // dd($meeting);
         
-        // if(!empty($meeting)){
-        //     // dd( now()->diff(date($meeting->created_at)));
-        //     $isToday = now()->diff(date($meeting->created_at))->days == 0;
-        //     if($isToday)
-        //         $meeting_id = $meeting->meeting_code;
-        //     // dd($meeting);
-        // }
+        if(!empty($meeting)){
+            // dd( now()->diff(date($meeting->created_at)));
+            // $isToday = now()->diff(date($meeting->created_at))->days == 0;
+            // if($isToday)
+                $meeting_id = $meeting->meeting_code;
+            // dd($meeting);
+        }
         
         if (empty($meeting_id)){
 
@@ -139,7 +139,7 @@ class MeetingController extends Controller
                 Bigbluebutton::join([
                     'meetingID' => $meeting_id,
                     'userName' => $user->fullName,
-                    'userID' => $user->id,
+                    // 'userID' => $user->id,
                     'password' => 'attendeepw' 
                 ])
             );
@@ -152,7 +152,7 @@ class MeetingController extends Controller
                 Bigbluebutton::join([
                     'meetingID' => $meeting_id,
                     'userName' => $user->fullName,
-                    'userID' => $user->id,
+                    // 'userID' => $user->id,
                     'password' => 'moderatorpw' 
                 ])
             );
