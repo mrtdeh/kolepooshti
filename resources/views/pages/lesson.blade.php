@@ -64,7 +64,7 @@
         <div class="col s12 l3">
             <div class="card gradient-shadow border-radius-3 border-padding">
                 <div class="card-content border-dashed center">
-                    <a href="{{ url('/panel/base/class/course/chemistry/class') }}">
+                    <a href="{{ url('/panel/base/class/course/chemistry/class?cls='.$room->id) }}">
                         <img src="{{ asset('images/icon/online-class.svg') }}" alt="images" class="width-40">
                         <h5 class="pt-10">کلاس آنلاین</h5>
                     </a>

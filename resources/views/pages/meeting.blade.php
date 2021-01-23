@@ -26,10 +26,12 @@
             <div class="card card-border center-align gradient-45deg-indigo-purple">
                 <div class="card-content">
                     <h6 class="white-text pb-10 border-bottom-1">جلسه پیش رو</h6>
-                    <p class="white-text pt-10">دوشنبه 17 آذر 1399</p>
-                    <p class="white-text pt-6">ساعت 08:00 الی 09:00</p>
+                    <p class="white-text pt-10">{{ $meetings["now"]["date"] }}</p>
+                    <p class="white-text pt-6">ساعت {{ $meetings["now"]["start"] }} الی {{ $meetings["now"]["end"] }}</p>
                     {{-- موقع فعال شدن کلاس gradient-45deg-deep-orange-orange به کلاس های المان زیر اضافه شود --}}
-                    <a class="waves-effect waves-light btn border-round mt-10 z-depth-4 disabled">ورود به جلسه</a>
+                    <a 
+                href="/meeting/select?uid={{ Auth::id() }}&ccs={{ $meetings["now"]["ccs_id"] }}"
+                    class="waves-effect waves-light btn border-round mt-10 z-depth-4 ">ورود به جلسه</a>
                 </div>
             </div>
             <div class="card card-border center-align gradient-45deg-amber-amber mt-10">
@@ -54,41 +56,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>جلسه 1</td>
-                                <td>1399/07/22</td>
-                                <td><span class="badge green lighten-5 green-text text-accent-4">08:00</span></td>
-                                <td><span class="badge red lighten-5 red-text text-accent-2">09:30</span></td>
-                                <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><i class="fas fa-clipboard-user orange-text m-2 modal-trigger" href="#modal"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>جلسه 2</td>
-                                <td>1399/08/13</td>
-                                <td><span class="badge green lighten-5 green-text text-accent-4">09:45</span></td>
-                                <td><span class="badge red lighten-5 red-text text-accent-2">11:15</span></td>
-                                <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><i class="fas fa-clipboard-user orange-text m-2 modal-trigger" href="#modal"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>جلسه 3</td>
-                                <td>1399/09/08</td>
-                                <td><span class="badge green lighten-5 green-text text-accent-4">11:30</span></td>
-                                <td><span class="badge red lighten-5 red-text text-accent-2">13:00</span></td>
-                                <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><i class="fas fa-clipboard-user orange-text m-2 modal-trigger" href="#modal"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>جلسه 4</td>
-                                <td>1399/09/29</td>
-                                <td><span class="badge green lighten-5 green-text text-accent-4">11:30</span></td>
-                                <td><span class="badge red lighten-5 red-text text-accent-2">13:00</span></td>
-                                <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><i class="fas fa-clipboard-user orange-text m-2"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>جلسه 5</td>
-                                <td>1399/10/03</td>
-                                <td><span class="badge green lighten-5 green-text text-accent-4">08:00</span></td>
-                                <td><span class="badge red lighten-5 red-text text-accent-2">09:30</span></td>
-                                <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><i class="fas fa-clipboard-user orange-text m-2"></i></a></td>
-                            </tr>
+                            {{-- {{dd($meetings)}} --}}
+                            @foreach ($meetings["pasts"] as $i => $p)
+                                @foreach ($p->meetings as $m)
+                                    <tr>
+                                        <td>{{ $p->sessionName }}</td>
+                                        <td>{{ jdate($m->created_at)->format("y/m/d") }}</td>
+                                        <td><span class="badge green lighten-5 green-text text-accent-4">
+                                            {{ $p->start }}
+                                        </span></td>
+                                        <td><span class="badge red lighten-5 red-text text-accent-2">
+                                            {{ $p->end }}
+                                        </span></td>
+                                        <td><a href="#"><i class="fas fa-video blue-text m-2"></i></a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#"><i class="fas fa-clipboard-user orange-text m-2 modal-trigger" href="#modal"></i></a></td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                           
+                           
                         </tbody>
                     </table>
                 </div>

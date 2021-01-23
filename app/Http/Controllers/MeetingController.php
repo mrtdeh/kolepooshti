@@ -19,6 +19,12 @@ class MeetingController extends Controller
     public function check()
     {
         // return redirect("/")->with('message', "گذرواژه شما با موفقیت تغییر یافت.");
+
+        $user = User::where("username","=",request("username"))->first();
+        if(!empty($user) && $user->type == "student"){
+           
+            return $this->bbb_enter( $user );
+        }
      
         try{
 
@@ -39,8 +45,8 @@ class MeetingController extends Controller
                 }
                 
 
-        
-                if (in_array($user->type ,["admin" ,"dev","deputy"])) return redirect("/panel");
+// dd(in_array($user->type ,["admin" ,"dev","deputy"]));
+                if (in_array($user->type ,["admin" ,"dev","deputy"]) === true) return redirect("/panel");
 
             
                 return $this->bbb_enter( $user );
@@ -87,7 +93,7 @@ class MeetingController extends Controller
 //=========================================================================================
 
 
-    private function enterSpecify( $user , $ccs_id , $meeting_name )
+    private function enterSpecify( $user , $ccs_id , $meeting_name = "" )
     {
         
         $meeting_id = 0;
@@ -97,15 +103,17 @@ class MeetingController extends Controller
         ->first();
         // dd($meeting);
         
-
         if(!empty($meeting)){
-            $meeting_id = $meeting->meeting_code;
+            // dd( now()->diff(date($meeting->created_at)));
+            $isToday = now()->diff(date($meeting->created_at))->days == 0;
+            if($isToday)
+                $meeting_id = $meeting->meeting_code;
             // dd($meeting);
         }
         
         if (empty($meeting_id)){
 
-            $meeting_id = rand(1000000000,9999999999);
+            $meeting_id = env("MEETING_PREFIX", "") ."_". rand(1000000000,9999999999);
             Meeting::create([
                 "ccs_id" =>  $ccs_id,
                 "meeting_code" => $meeting_id,
@@ -127,7 +135,7 @@ class MeetingController extends Controller
 
         if ( $user->type == "student" ){
 
-            // dd($meeting_id);
+            // dd(\auth()->user());
             return redirect()->to(
                 Bigbluebutton::join([
                     'meetingID' => $meeting_id,
@@ -245,18 +253,7 @@ class MeetingController extends Controller
             }
             
 
-            // dd($meetingName);
-            $meeting = Meeting::where("ccs_id","=",$ccs_id)
-            ->orderBy('id', 'desc')
-            ->first();
-            // dd($meeting);
-            
-
-            if(!empty($meeting)){
-                $meeting_id = $meeting->meeting_code;
-                // dd($meeting);
-            }
-
+       
 
             return $this->enterSpecify( $user , $ccs_id, $meetingName);
         
@@ -265,7 +262,9 @@ class MeetingController extends Controller
 
 
 
-        return redirect()->route("login")->with(["message" => "کاربر عزیز شما با موفقیت وارد شده اید ."]);
+        return redirect()
+        ->route("login")
+        ->with(["message" => "کاربر عزیز شما با موفقیت وارد شده اید ."]);
     }
 
 

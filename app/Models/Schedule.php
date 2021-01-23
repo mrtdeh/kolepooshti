@@ -27,7 +27,17 @@ class Schedule extends Model
 
     public function course()
     {
-        return $this->belongsToMany( Course::class ,'class_course_schedule' ,"schedule_id" )->first(); 
+        return $this->belongsToMany( Course::class ,'class_course_schedule' )->first(); 
+    }
+
+    public function room()
+    {
+        return $this->belongsToMany( ClassRoom::class ,'class_course_schedule' ,"schedule_id" ,"class_id")->first(); 
+    }
+
+    public function teacher()
+    {
+        return $this->belongsToMany( User::class ,'class_course_schedule' ,"schedule_id" ,"teacher_id")->first(); 
     }
 
     public static function addWeekTimes( $rows = [] , $clear = false )

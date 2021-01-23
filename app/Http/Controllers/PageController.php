@@ -6,6 +6,7 @@ use App\Models\Base;
 use App\Models\Time;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Meeting;
 use App\Models\ClassRoom;
 
 class PageController extends Controller
@@ -122,7 +123,7 @@ class PageController extends Controller
         $room = ClassRoom::with("users")->find($classId);
         $students =  $room->users()->students()->get();
         $course = Course::find($courseId);
-
+// dd($room);
       
         return view('pages.lesson',  compact("room","students","course","breadcrumbs","pageConfigs"));
     }    
@@ -132,15 +133,18 @@ class PageController extends Controller
 
     public function showChemistryClass() {
 
-        auth()->login(User::find(71));
-        $nextm = app('App\Http\Controllers\MeetingController')->nextMeetingInfo();
+        // auth()->login(User::find(71));
+        // $nextm = app('App\Http\Controllers\MeetingController')->nextMeetingInfo();
         // dd($nextm );
+        $classId = request()->cls;
+        $meetings = Meeting::getMeetingsStatus($classId);
+        
         $breadcrumbs = [
             ['link' => "/base/class/meeting", 'name' => "پایه دوازدهم"], ['link' => "/base/class/course", 'name' => "کلاس ریاضی الف"], ['link' => "/base/class/course/chemistry", 'name' => "درس شیمی"], ['name' => "کلاس آنلاین"],
         ];
         //Pageheader set true for breadcrumbs
         $pageConfigs = ['pageHeader' => true];
-        return view('pages.meeting', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+        return view('pages.meeting', compact("meetings","breadcrumbs","pageConfigs"));
     }
 
 
