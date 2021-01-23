@@ -43,7 +43,7 @@
                     <input id="email" type="text" class=" @error('text') is-invalid @enderror" name="username"
                         value="{{ old('email') }}" required autocomplete="email" autofocus>
                     <label for="email" class="center-align">{{ __('نام کاربری') }}</label>
-                    @error('email')
+                    @error('username')
                     <small class="red-text ml-10" role="alert">
                         {{ $message }}
                     </small>

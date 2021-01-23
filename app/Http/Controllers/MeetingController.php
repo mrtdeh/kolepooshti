@@ -45,7 +45,6 @@ class MeetingController extends Controller
                 }
                 
 
-// dd(in_array($user->type ,["admin" ,"dev","deputy"]));
                 if (in_array($user->type ,["admin" ,"dev","deputy"]) === true) return redirect("/panel");
 
             
@@ -261,7 +260,7 @@ class MeetingController extends Controller
         }
 
 
-
+        // dd("sdfdsf");
         return redirect()
         ->route("login")
         ->with(["message" => "کاربر عزیز شما با موفقیت وارد شده اید ."]);

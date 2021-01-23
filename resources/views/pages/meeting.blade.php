@@ -26,12 +26,25 @@
             <div class="card card-border center-align gradient-45deg-indigo-purple">
                 <div class="card-content">
                     <h6 class="white-text pb-10 border-bottom-1">جلسه پیش رو</h6>
-                    <p class="white-text pt-10">{{ $meetings["now"]["date"] }}</p>
-                    <p class="white-text pt-6">ساعت {{ $meetings["now"]["start"] }} الی {{ $meetings["now"]["end"] }}</p>
-                    {{-- موقع فعال شدن کلاس gradient-45deg-deep-orange-orange به کلاس های المان زیر اضافه شود --}}
-                    <a 
-                href="/meeting/select?uid={{ Auth::id() }}&ccs={{ $meetings["now"]["ccs_id"] }}"
-                    class="waves-effect waves-light btn border-round mt-10 z-depth-4 ">ورود به جلسه</a>
+                    @if(!empty($meetings["now"]))
+                        <p class="white-text pt-10">{{ $meetings["now"]["date"] }}</p>
+                        <p class="white-text pt-6">ساعت {{ $meetings["now"]["start"] }} الی {{ $meetings["now"]["end"] }}</p>
+                        {{-- موقع فعال شدن کلاس gradient-45deg-deep-orange-orange به کلاس های المان زیر اضافه شود --}}
+                        <a 
+                    href="/meeting/select?uid={{ Auth::id() }}&ccs={{ $meetings["now"]["ccs_id"] }}"
+                        class="waves-effect waves-light btn border-round mt-10 z-depth-4 ">ورود به جلسه</a>
+                    @elseif(!empty($meetings["next"]))
+                        <p class="white-text pt-10">{{ $meetings["next"]["date"] }}</p>
+                        <p class="white-text pt-6">ساعت {{ $meetings["next"]["start"] }} الی {{ $meetings["now"]["end"] }}</p>
+                        {{-- موقع فعال شدن کلاس gradient-45deg-deep-orange-orange به کلاس های المان زیر اضافه شود --}}
+                        <a 
+                    href="#"
+                        class="waves-effect waves-light btn border-round mt-10 z-depth-4 disabled">ورود به جلسه</a>
+                    @else   
+
+                        <p class="white-text pt-10">اتمام جلسات امروز</p>
+                    
+                    @endif
                 </div>
             </div>
             <div class="card card-border center-align gradient-45deg-amber-amber mt-10">
